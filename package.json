@@ -1,0 +1,21 @@
+{
+  "name": "graphql-training",
+  "version": "1.0.0",
+  "description": "Slalom GraphQL Training",
+  "main": "server.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:gettingstarted": "node getting_started.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/slalom-consulting/graphql-training.git"
+  },
+  "author": "kyle.banner@slalom.com",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/slalom-consulting/graphql-training#readme",
+  "dependencies": {
+    "apollo-server": "^3.6.7",
+    "graphql": "^16.3.0"
+  }
+}
