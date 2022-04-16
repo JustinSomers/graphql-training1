@@ -4,9 +4,8 @@ import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 import { ApolloServer } from 'apollo-server-express';
 import { createComplexityLimitRule } from 'graphql-validation-complexity';
 import express from 'express';
-import resolvers from './resolver/employee.resolver';
+import resolvers from './resolver';
 import config from './apolloServerConfig.json';
-// import context from './context';
 
 (async () => {
   const app = express();
@@ -19,7 +18,7 @@ import config from './apolloServerConfig.json';
     resolvers, // "stitched" up resolvers all added to server at once
   });
   const apolloServer = new ApolloServer({
-    schema: schemaWithResolvers,
+    schema: schemaWithResolvers, // resolvers must be imported with schema when using loadSchema helper function
     introspection: config.introspection,
     validationRules: [createComplexityLimitRule(config.operationComplexityLimit)],
   });
