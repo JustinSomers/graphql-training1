@@ -1,0 +1,40 @@
+enum Practice {
+  TE,
+  DA,
+  DL,
+  BAS,
+  AC,
+}
+
+enum Title {
+  AN,
+  CO,
+  SA,
+  CM,
+  PC,
+  SP,
+  PAL,
+  PAD,
+  MD,
+  GM,
+}
+
+type Name {
+  firstName: String
+  lastName: String
+}
+
+type Employee {
+  id: String
+  name: Name
+  title: Title!
+  email: String!
+  practice: Practice!
+}
+
+extend type Query {
+  """
+  Retrieve employee by id
+  """
+  employee(id: String): Employee
+}

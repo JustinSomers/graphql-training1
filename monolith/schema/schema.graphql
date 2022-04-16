@@ -1,0 +1,4 @@
+"""
+GraphQL operations that query/read data.
+"""
+type Query
