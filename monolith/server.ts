@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import { loadSchema } from '@graphql-tools/load';
 import { addResolversToSchema } from '@graphql-tools/schema';
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
@@ -6,6 +7,7 @@ import { createComplexityLimitRule } from 'graphql-validation-complexity';
 import express from 'express';
 import resolvers from './resolver';
 import config from './apolloServerConfig.json';
+import { ImgurApi } from './imgurApiClient';
 
 (async () => {
   const app = express();
@@ -18,6 +20,9 @@ import config from './apolloServerConfig.json';
     resolvers, // "stitched" up resolvers all added to server at once
   });
   const apolloServer = new ApolloServer({
+    dataSources: () => ({
+      imgurApi: new ImgurApi()
+    }),
     schema: schemaWithResolvers, // resolvers must be imported with schema when using loadSchema helper function
     introspection: config.introspection,
     validationRules: [createComplexityLimitRule(config.operationComplexityLimit)],

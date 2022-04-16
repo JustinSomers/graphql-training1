@@ -1,15 +1,10 @@
 const employee = async (
   args,
   dataSources,
-) => ({
-  id: '1234',
-  name: {
-    firstName: 'Kyle',
-    lastName: 'Banner',
-  },
-  title: 'CO',
-  email: 'kyle.banner@example.com',
-  practice: 'TE',
-});
+) => {
+  const result = await dataSources.imgurApi.getAccountBase('hikesdogsbeers');
+  console.log('service result', result);
+  return result;
+};
 
 export default employee;
