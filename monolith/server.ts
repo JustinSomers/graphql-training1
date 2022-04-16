@@ -23,9 +23,9 @@ import config from './apolloServerConfig.json';
     validationRules: [createComplexityLimitRule(config.operationComplexityLimit)],
   });
   await apolloServer.start();
-  apolloServer.applyMiddleware({ app, path: config.graphQLPath, });
+  apolloServer.applyMiddleware({ app, path: config.graphQLPath });
 
-  const port = config.port;
+  const { port } = config;
   app.listen({ port }, () => {
     // eslint-disable-next-line no-console
     console.log(`🚀 Apollo Server v3 GraphQL API launched at: http://localhost:${port}${apolloServer.graphqlPath}`);
