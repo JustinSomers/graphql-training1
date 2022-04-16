@@ -25,6 +25,7 @@
     "express": "^4.17.3",
     "graphql": "^16.3.0",
     "graphql-validation-complexity": "^0.4.2",
+    "lodash": "^4.17.21",
     "tsconfig-paths": "^3.14.1"
   },
   "devDependencies": {
