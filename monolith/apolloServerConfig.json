@@ -1,0 +1,7 @@
+{
+  "serviceName": "imgur-graphql-monolith",
+  "graphQLPath": "/graph",
+  "port": 4000,
+  "introspection": true,
+  "operationComplexityLimit": "20000"
+}
