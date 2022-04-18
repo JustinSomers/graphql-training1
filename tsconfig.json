@@ -10,8 +10,7 @@
     "typeRoots": ["node_modules/@types"],
     "baseUrl": ".",
     "paths": {
-      "@part2Employee/*": ["domain/employee/*"],
-      "@part2/*": ["*"],
+      "@monolith/*": ["monolith/*"]
     }
   },
   "include": ["**/*.ts"]
