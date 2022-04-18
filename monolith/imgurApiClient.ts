@@ -17,19 +17,5 @@ export class ImgurApi extends RESTDataSource {
 
     const result = await this.get(`/3/account/${username}`);
     return result;
-
-    return {
-      name: {
-        firstName: 'Kyle',
-        lastName: 'Banner',
-      },
-      title: 'Solution Architect',
-      email: 'kyle.banner@slalom.com',
-      practice: 'Technology Enablement',
-      id: '1234'
-    };
-    // const result = await this.get(`employees/${employeeId}`);
-
-    // return result;
   }
 };

@@ -1,8 +1,8 @@
-import employee from '../service/employee.service';
+import account from '@monolith/service/account.service';
 
 const resolver = {
   Query: {
-    employee: async (parent, args, context) => employee(args, context.dataSources),
+    account: async (parent, args, context) => account(args, context.dataSources),
   },
 };
 
