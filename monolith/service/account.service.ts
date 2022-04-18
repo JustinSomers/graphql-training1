@@ -1,4 +1,4 @@
-const employee = async (
+export const account = async (
   args,
   dataSources,
 ) => {
@@ -6,4 +6,14 @@ const employee = async (
   return result.data;
 };
 
-export default employee;
+export const avatar = async (
+  parent,
+  args,
+  dataSources
+) => {
+  const avatarSchema = {
+    url: parent.avatar,
+    avatar_name: parent.avatar_name,
+  };
+  return avatarSchema;
+};

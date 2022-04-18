@@ -1,0 +1,38 @@
+type Account {
+  id: Int
+  bio: String
+  url: String
+  avatar: Avatar
+  cover: Cover
+  reputation: Reputation
+  created: Int
+  pro_expiration: Boolean
+  user_follow: UserFollow
+  is_blocked: Boolean
+}
+
+type Cover {
+  cover: String
+  cover_name: String
+}
+
+type Avatar {
+  url: String
+  avatar_name: String
+}
+
+type Reputation {
+  reputation: Int
+  reputation_name: String
+}
+
+type UserFollow {
+  status: Boolean
+}
+
+extend type Query {
+  """
+  Retrieve account by username
+  """
+  account(username: String): Account
+}
