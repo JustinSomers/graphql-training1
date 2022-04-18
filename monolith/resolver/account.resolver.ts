@@ -5,7 +5,7 @@ const resolver = {
     account: async (parent, args, context) => account(args, context.dataSources),
   },
   Account: {
-    avatar: async (parent, args, context) => avatar(parent, args, context.dataSources),
+    avatar: async (parent) => avatar(parent),
   },
 };
 
