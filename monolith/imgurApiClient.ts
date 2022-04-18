@@ -1,16 +1,16 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
 
-export class ImgurApi extends RESTDataSource {
+export default class ImgurApi extends RESTDataSource {
   constructor() {
     super();
     this.baseURL = 'https://api.imgur.com';
   }
 
-  willSendRequest(request) {
+  static willSendRequest(request) {
     request.headers.set('Authorization', `Client-ID ${process.env.CLIENT_ID}`);
   }
 
-  async getAccountBase(username: String) {
+  async getAccountBase(username: string) {
     if (!username) {
       throw new Error('No username');
     }

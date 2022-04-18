@@ -8,8 +8,8 @@ export const account = async (
 
 export const avatar = async (
   parent,
-  args,
-  dataSources
+  // args,
+  // dataSources,
 ) => {
   const avatarSchema = {
     url: parent.avatar,

@@ -8,7 +8,7 @@ import express from 'express';
 
 import resolvers from '@monolith/resolver';
 import config from '@monolith/apolloServerConfig.json';
-import { ImgurApi } from '@monolith/imgurApiClient';
+import ImgurApi from '@monolith/imgurApiClient';
 
 (async () => {
   const expressApp = express();
@@ -24,7 +24,8 @@ import { ImgurApi } from '@monolith/imgurApiClient';
     dataSources: () => ({
       imgurApi: new ImgurApi(),
     }),
-    schema: schemaWithResolvers, // resolvers must be imported with schema when using loadSchema helper function
+    // resolvers must be imported with schema when using loadSchema helper function
+    schema: schemaWithResolvers,
     introspection: config.introspection,
     validationRules: [createComplexityLimitRule(config.operationComplexityLimit)],
   });
