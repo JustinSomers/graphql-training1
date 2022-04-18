@@ -18,4 +18,4 @@ export class ImgurApi extends RESTDataSource {
     const result = await this.get(`/3/account/${username}`);
     return result;
   }
-};
+}
