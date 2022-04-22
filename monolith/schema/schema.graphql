@@ -1,4 +1,4 @@
 """
-GraphQL operations that query/read data.
+GraphQL core operations
 """
 type Query
