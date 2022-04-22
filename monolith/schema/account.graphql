@@ -2,28 +2,23 @@ type Account {
   id: Int
   bio: String
   url: String
-  avatar: Avatar
+  avatars: Avatars
   cover: Cover
   reputation: Reputation
   created: Int
-  pro_expiration: Boolean
-  user_follow: UserFollow
-  is_blocked: Boolean
+  proExpiration: Boolean
+  userFollow: UserFollow
+  isBlocked: Boolean
 }
 
 type Cover {
   cover: String
-  cover_name: String
-}
-
-type Avatar {
-  url: String
-  avatar_name: String
+  coverName: String
 }
 
 type Reputation {
   reputation: Int
-  reputation_name: String
+  reputationName: String
 }
 
 type UserFollow {
@@ -34,5 +29,5 @@ extend type Query {
   """
   Retrieve account by username
   """
-  account(username: String): Account
+  account(username: String!): Account
 }

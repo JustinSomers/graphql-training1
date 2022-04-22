@@ -1,4 +1,5 @@
 import { merge } from 'lodash';
-import employeeResolver from '@monolith/resolver/account.resolver';
+import accountResolver from '@monolith/resolver/account.resolver';
+import avatarResolver from '@monolith/resolver/avatar.resolver';
 
-export default merge(employeeResolver);
+export default merge(accountResolver, avatarResolver);

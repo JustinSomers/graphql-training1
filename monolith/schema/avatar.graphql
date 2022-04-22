@@ -1,0 +1,11 @@
+type Avatars {
+  current: Avatar
+  // TODO: pass in username arg from above if possible
+  // use context w/ username persistence from charter as example
+  available(username: String!): [Avatar]
+}
+
+type Avatar {
+  url: String
+  name: String
+}
