@@ -22,12 +22,19 @@ import ImgurApi from '@monolith/imgurApiClient';
   });
   const apolloServer = new ApolloServer({
     dataSources: () => ({
+      // dataSources should create a new instance of each data source for each operation
+      // apollographql.com/docs/apollo-server/data/data-sources/
       imgurApi: new ImgurApi(),
     }),
     // resolvers must be imported with schema when using loadSchema helper function
     schema: schemaWithResolvers,
     introspection: config.introspection,
     validationRules: [createComplexityLimitRule(config.operationComplexityLimit)],
+    context: () => ({
+      session: {
+        username: process.env.USERNAME,
+      },
+    }),
   });
   await apolloServer.start();
   apolloServer.applyMiddleware({ app: expressApp, path: config.graphQLPath });
