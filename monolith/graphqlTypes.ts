@@ -54,20 +54,29 @@ export type Cover = {
 /** GraphQL core operations */
 export type Query = {
   __typename?: 'Query';
-  /** Retrieve account by username */
-  account?: Maybe<Account>;
-};
-
-
-/** GraphQL core operations */
-export type QueryAccountArgs = {
-  username: Scalars['String'];
+  /** The authenticated viewing user */
+  viewer: User;
 };
 
 export type Reputation = {
   __typename?: 'Reputation';
   reputation?: Maybe<Scalars['Int']>;
   reputationName?: Maybe<Scalars['String']>;
+};
+
+/** Information about the authenticated user (viewer) */
+export type User = {
+  __typename?: 'User';
+  /** Retrieve account by username */
+  account?: Maybe<Account>;
+  id: Scalars['Int'];
+  username: Scalars['String'];
+};
+
+
+/** Information about the authenticated user (viewer) */
+export type UserAccountArgs = {
+  username: Scalars['String'];
 };
 
 export type UserFollow = {
@@ -153,6 +162,7 @@ export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>;
   Reputation: ResolverTypeWrapper<Reputation>;
   String: ResolverTypeWrapper<Scalars['String']>;
+  User: ResolverTypeWrapper<User>;
   UserFollow: ResolverTypeWrapper<UserFollow>;
 };
 
@@ -167,6 +177,7 @@ export type ResolversParentTypes = {
   Query: {};
   Reputation: Reputation;
   String: Scalars['String'];
+  User: User;
   UserFollow: UserFollow;
 };
 
@@ -203,12 +214,19 @@ export type CoverResolvers<ContextType = any, ParentType extends ResolversParent
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  account?: Resolver<Maybe<ResolversTypes['Account']>, ParentType, ContextType, RequireFields<QueryAccountArgs, 'username'>>;
+  viewer?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
 };
 
 export type ReputationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Reputation'] = ResolversParentTypes['Reputation']> = {
   reputation?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   reputationName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
+  account?: Resolver<Maybe<ResolversTypes['Account']>, ParentType, ContextType, RequireFields<UserAccountArgs, 'username'>>;
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  username?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -224,6 +242,7 @@ export type Resolvers<ContextType = any> = {
   Cover?: CoverResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Reputation?: ReputationResolvers<ContextType>;
+  User?: UserResolvers<ContextType>;
   UserFollow?: UserFollowResolvers<ContextType>;
 };
 

@@ -1,3 +1,10 @@
+extend type User {
+  """
+  Retrieve account by username
+  """
+  account(username: String!): Account
+}
+
 type Account {
   id: Int
   bio: String
@@ -23,11 +30,4 @@ type Reputation {
 
 type UserFollow {
   status: Boolean
-}
-
-extend type Query {
-  """
-  Retrieve account by username
-  """
-  account(username: String!): Account
 }

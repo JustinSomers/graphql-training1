@@ -1,11 +1,11 @@
-import { Account,  QueryAccountArgs } from '@monolith/graphqlTypes';
+import { Account, UserAccountArgs } from '@monolith/graphqlTypes';
 
 // eslint-disable-next-line import/prefer-default-export
 export const account = async (
-  args: QueryAccountArgs,
-  dataSources,
+  args: UserAccountArgs,
+  context,
 ): Promise<Account> => {
-  const result = await dataSources.imgurApi.getAccountBase(args.username);
+  const result = await context.dataSources.imgurApi.getAccountBase(context.username);
   return {
     id: result.data.id,
     isBlocked: result.data.is_blocked,
