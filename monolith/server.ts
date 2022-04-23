@@ -9,6 +9,7 @@ import express from 'express';
 import resolvers from '@monolith/resolver';
 import config from '@monolith/apolloServerConfig.json';
 import ImgurApi from '@monolith/imgurApiClient';
+import context from '@monolith/context';
 
 (async () => {
   const expressApp = express();
@@ -30,11 +31,7 @@ import ImgurApi from '@monolith/imgurApiClient';
     schema: schemaWithResolvers,
     introspection: config.introspection,
     validationRules: [createComplexityLimitRule(config.operationComplexityLimit)],
-    context: () => ({
-      session: {
-        username: process.env.USERNAME,
-      },
-    }),
+    context,
   });
   await apolloServer.start();
   apolloServer.applyMiddleware({ app: expressApp, path: config.graphQLPath });
