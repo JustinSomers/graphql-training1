@@ -5,7 +5,7 @@ export const account = async (
   args: UserAccountArgs,
   context,
 ): Promise<Account> => {
-  const result = await context.dataSources.imgurApi.getAccountBase(context.username);
+  const result = await context.dataSources.imgurApi.getAccountBase(args.username);
   return {
     id: result.data.id,
     isBlocked: result.data.is_blocked,
