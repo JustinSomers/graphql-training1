@@ -1,3 +1,4 @@
+import fetch from 'node-fetch';
 import { RESTDataSource } from 'apollo-datasource-rest';
 
 export default class ImgurApi extends RESTDataSource {
@@ -28,5 +29,19 @@ export default class ImgurApi extends RESTDataSource {
 
     const result = await this.get(`/3/account/${username}/available_avatars`);
     return result;
+  }
+
+  async getSession() {
+    const response = await fetch(
+      `${this.baseURL}/3/account/${process.env.USERNAME}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Client-ID ${process.env.CLIENT_ID}`,
+        },
+      },
+    );
+    const responseJson = await response.json();
+    return responseJson.data;
   }
 }
