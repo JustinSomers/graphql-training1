@@ -7,5 +7,14 @@ export const account = async (
   context,
 ): Promise<Account> => {
   const result = await context.dataSources.imgurApi.getAccountBase(args.username);
-  return accountMapper.map(result);
+  const mappedAccount = accountMapper.map(result);
+  const avatarResult = await context.dataSources.imgurApi.getAvailableAvatars(args.username);
+  mappedAccount.avatars.available = [];
+  avatarResult.data.available_avatars.forEach((avatar) => {
+    mappedAccount.avatars.available.push({
+      url: avatar.location,
+      name: avatar.name,
+    });
+  });
+  return mappedAccount;
 };
