@@ -1,5 +1,6 @@
 import { Account, UserAccountArgs } from '@monolith/graphqlTypes';
 import accountMapper from '@monolith/service/account/account.mapper';
+import { getAvailableAvatars } from '@monolith/service/avatar.service';
 
 // eslint-disable-next-line import/prefer-default-export
 export const account = async (
@@ -8,13 +9,7 @@ export const account = async (
 ): Promise<Account> => {
   const result = await context.dataSources.imgurApi.getAccountBase(args.username);
   const mappedAccount = accountMapper.map(result);
-  const avatarResult = await context.dataSources.imgurApi.getAvailableAvatars(args.username);
-  mappedAccount.avatars.available = [];
-  avatarResult.data.available_avatars.forEach((avatar) => {
-    mappedAccount.avatars.available.push({
-      url: avatar.location,
-      name: avatar.name,
-    });
-  });
+  const availableAvatars = await getAvailableAvatars(args.username, context);
+  mappedAccount.avatars.available = availableAvatars;
   return mappedAccount;
 };

@@ -6,8 +6,8 @@ export const currentAvatar = async (parent): Promise<Avatar> => ({
   name: parent.avatar_name,
 });
 
-export const availableAvatars = async (args, context): Promise<Avatar[]> => {
-  const result = await context.dataSources.imgurApi.getAvailableAvatars(args.username);
+export const getAvailableAvatars = async (username, context): Promise<Avatar[]> => {
+  const result = await context.dataSources.imgurApi.getAvailableAvatars(username);
   const avatars = [];
   result.data.available_avatars.forEach((avatar) => {
     avatars.push({
