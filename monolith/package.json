@@ -6,7 +6,9 @@
   "scripts": {
     "lint": "eslint '**/*.{ts,js}'",
     "lint:fix": "eslint '**/*.{ts,js}' --fix",
-    "start": "ts-node-dev -r tsconfig-paths/register server.ts",
+    "start": "concurrently -p \"[{name}]\" -n \"redis,apollo\" -c \"bgBlue.bold,bgRed.bold\" \"npm run startRedis\" \"npm run startServer\"",
+    "startRedis": "redis-server",
+    "startServer": "ts-node-dev -r tsconfig-paths/register server.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "generate-typings": "graphql-codegen"
   },
@@ -29,6 +31,8 @@
     "graphql": "^16.3.0",
     "graphql-validation-complexity": "^0.4.2",
     "lodash": "^4.17.21",
+    "node-fetch": "^2.6.1",
+    "redis": "^4.0.6",
     "tsconfig-paths": "^3.14.1"
   },
   "devDependencies": {
@@ -38,6 +42,7 @@
     "@types/lodash": "^4.14.182",
     "@typescript-eslint/eslint-plugin": "^5.19.0",
     "@typescript-eslint/parser": "^5.19.0",
+    "concurrently": "^7.1.0",
     "eslint": "^8.13.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-import-resolver-typescript": "^2.7.1",
