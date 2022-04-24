@@ -1,0 +1,14 @@
+type FollowTagPayload {
+  success: Boolean
+}
+
+input FollowTagInput {
+  tag: String
+}
+
+extend type Mutation {
+  """
+  Update metadata for an Account.
+  """
+  followTag(input: FollowTagInput!): FollowTagPayload
+}

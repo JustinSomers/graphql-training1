@@ -2,3 +2,4 @@
 GraphQL core operations
 """
 type Query
+type Mutation

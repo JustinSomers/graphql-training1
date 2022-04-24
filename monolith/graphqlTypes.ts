@@ -46,6 +46,26 @@ export type Cover = {
   coverName?: Maybe<Scalars['String']>;
 };
 
+export type FollowTagInput = {
+  tag?: InputMaybe<Scalars['String']>;
+};
+
+export type FollowTagPayload = {
+  __typename?: 'FollowTagPayload';
+  success?: Maybe<Scalars['Boolean']>;
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  /** Update metadata for an Account. */
+  followTag?: Maybe<FollowTagPayload>;
+};
+
+
+export type MutationFollowTagArgs = {
+  input: FollowTagInput;
+};
+
 /** GraphQL core operations */
 export type Query = {
   __typename?: 'Query';
@@ -153,7 +173,10 @@ export type ResolversTypes = {
   Avatars: ResolverTypeWrapper<Avatars>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Cover: ResolverTypeWrapper<Cover>;
+  FollowTagInput: FollowTagInput;
+  FollowTagPayload: ResolverTypeWrapper<FollowTagPayload>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
+  Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   Reputation: ResolverTypeWrapper<Reputation>;
   String: ResolverTypeWrapper<Scalars['String']>;
@@ -168,7 +191,10 @@ export type ResolversParentTypes = {
   Avatars: Avatars;
   Boolean: Scalars['Boolean'];
   Cover: Cover;
+  FollowTagInput: FollowTagInput;
+  FollowTagPayload: FollowTagPayload;
   Int: Scalars['Int'];
+  Mutation: {};
   Query: {};
   Reputation: Reputation;
   String: Scalars['String'];
@@ -208,6 +234,15 @@ export type CoverResolvers<ContextType = any, ParentType extends ResolversParent
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type FollowTagPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['FollowTagPayload'] = ResolversParentTypes['FollowTagPayload']> = {
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  followTag?: Resolver<Maybe<ResolversTypes['FollowTagPayload']>, ParentType, ContextType, RequireFields<MutationFollowTagArgs, 'input'>>;
+};
+
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   viewer?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
 };
@@ -235,6 +270,8 @@ export type Resolvers<ContextType = any> = {
   Avatar?: AvatarResolvers<ContextType>;
   Avatars?: AvatarsResolvers<ContextType>;
   Cover?: CoverResolvers<ContextType>;
+  FollowTagPayload?: FollowTagPayloadResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Reputation?: ReputationResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
