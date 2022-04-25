@@ -46,11 +46,11 @@ export default class ImgurApi extends RESTDataSource implements IImgurApi {
       {
         method: 'GET',
         headers: {
-          Authorization: this.context.accessToken,
+          Authorization: `Client-ID ${process.env.CLIENT_ID}`,
         },
       },
     );
-    const responseJson: AccountBase = await response.json();
+    const responseJson: AccountBase = response.parsedBody;
     return responseJson;
   }
 }

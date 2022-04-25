@@ -1,3 +1,5 @@
+import fetch, { RequestInfo, RequestInit, Response } from 'node-fetch';
+
 interface HttpResponse<T> extends Response {
   parsedBody?: T;
 }

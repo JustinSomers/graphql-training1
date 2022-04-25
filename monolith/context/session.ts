@@ -1,26 +1,24 @@
 import { Session } from '@monolith/context';
 import redisClient from '@monolith/redisClient';
 import ImgurApi from '@monolith/dataSources/imgurApiClient';
+import { AccountBase } from '@monolith/service/account/types';
+import IImgurApi from '@monolith/dataSources/imgurApiClient.interface';
 
 const getSession = async (): Promise<Session> => {
   const client = await redisClient();
 
-  let session = await client.get(process.env.USERNAME);
-  session = JSON.parse(session);
+  const cachedSession: string = await client.get(process.env.USERNAME);
+  let session: AccountBase = JSON.parse(cachedSession);
 
   if (!session) {
-    const imgurApi = new ImgurApi();
-    //@ts-ignore
+    const imgurApi: IImgurApi = new ImgurApi();
     session = await imgurApi.getSession();
-    //@ts-ignore
-    await client.set(process.env.USERNAME, JSON.stringify(session.data));
+    await client.set(process.env.USERNAME, JSON.stringify(session));
   }
 
   return {
-    //@ts-ignore
-    id: session.id,
-    //@ts-ignore
-    username: session.username,
+    id: session.data.id,
+    username: process.env.USERNAME,
   };
 };
 
