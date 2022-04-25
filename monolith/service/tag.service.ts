@@ -1,6 +1,6 @@
 import { MutationFollowTagArgs, FollowTagPayload } from '@monolith/graphqlTypes';
 import { Context } from '@monolith/context';
-import { FollowTag } from '@monolith/service/account/types';
+import { FollowTag } from '@monolith/dataSources/imgurApi/types';
 
 const followTag = async (
   args: MutationFollowTagArgs,

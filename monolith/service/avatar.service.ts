@@ -1,6 +1,6 @@
 import { Avatar } from '@monolith/graphqlTypes';
 import { Context } from '@monolith/context';
-import { AvailableAvatars } from '@monolith/service/account/types';
+import { AvailableAvatars } from '@monolith/dataSources/imgurApi/types';
 
 const getAvailableAvatars = async (
   username: string,

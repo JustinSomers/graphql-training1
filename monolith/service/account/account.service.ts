@@ -2,7 +2,7 @@ import { Context } from '@monolith/context';
 import { Account, Avatar, UserAccountArgs } from '@monolith/graphqlTypes';
 import accountMapper from '@monolith/service/account/account.mapper';
 import getAvailableAvatars from '@monolith/service/avatar.service';
-import { AccountBase } from '@monolith/service/account/types';
+import { AccountBase } from '@monolith/dataSources/imgurApi/types';
 
 const account = async (
   args: UserAccountArgs,

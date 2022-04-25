@@ -1,7 +1,7 @@
-import httpFetch from '@monolith/dataSources/imgurApiClient.types';
+import httpFetch from '@monolith/dataSources/imgurApi/imgurApiClient.types';
 import { RESTDataSource, RequestOptions } from 'apollo-datasource-rest';
-import { AccountBase, AvailableAvatars, FollowTag } from '@monolith/service/account/types';
-import IImgurApi from '@monolith/dataSources/imgurApiClient.interface';
+import { AccountBase, AvailableAvatars, FollowTag } from '@monolith/dataSources/imgurApi/types';
+import IImgurApi from '@monolith/dataSources/imgurApi/imgurApiClient.interface';
 
 export default class ImgurApi extends RESTDataSource implements IImgurApi {
   constructor() {

@@ -1,5 +1,5 @@
 import { RequestOptions } from 'apollo-datasource-rest';
-import { AccountBase, AvailableAvatars, FollowTag } from '@monolith/service/account/types';
+import { AccountBase, AvailableAvatars, FollowTag } from '@monolith/dataSources/imgurApi/types';
 
 interface IImgurApi {
   willSendRequest(request: RequestOptions): void;

@@ -1,5 +1,5 @@
 import getSession from '@monolith/context/session';
-import IImgurApi from '@monolith/dataSources/imgurApiClient.interface';
+import IImgurApi from '@monolith/dataSources/imgurApi/imgurApiClient.interface';
 import { ExpressContext } from 'apollo-server-express';
 
 export type Session = {
