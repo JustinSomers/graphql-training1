@@ -1,17 +1,13 @@
 import { Avatar } from '@monolith/graphqlTypes';
 import { Context } from '@monolith/context';
+import { AvailableAvatars } from '@monolith/service/account/types';
 
-export const currentAvatar = async (parent): Promise<Avatar> => ({
-  url: parent.avatar,
-  name: parent.avatar_name,
-});
-
-export const getAvailableAvatars = async (
+const getAvailableAvatars = async (
   username: string,
   context: Context,
 ): Promise<Avatar[]> => {
-  const result = await context.dataSources.imgurApi.getAvailableAvatars(username);
-  const avatars = [];
+  const result: AvailableAvatars = await context.dataSources.imgurApi.getAvailableAvatars(username);
+  const avatars: Avatar[] = [];
   result.data.available_avatars.forEach((avatar) => {
     avatars.push({
       url: avatar.location,
@@ -20,3 +16,5 @@ export const getAvailableAvatars = async (
   });
   return avatars;
 };
+
+export default getAvailableAvatars;
