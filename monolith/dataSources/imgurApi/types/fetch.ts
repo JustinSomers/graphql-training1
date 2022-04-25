@@ -12,7 +12,6 @@ async function httpFetch<T>(
     request,
     options,
   );
-  response.parsedBody = await response.json();
   return response;
 }
 

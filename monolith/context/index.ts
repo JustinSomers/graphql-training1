@@ -20,7 +20,12 @@ export type CustomContext = {
 
 export type Context = CustomContext & DataSourceContext;
 
-export const context = async ({ req }: ExpressContext): Promise<CustomContext> => ({
-  accessToken: req.header('Authorization'),
-  session: await getSession(),
-});
+export const context = async ({ req }: ExpressContext): Promise<CustomContext> => {
+  const accessToken: string | undefined = req.header('Authorization');
+  if (!accessToken) throw new Error('no Authorization header');
+
+  return {
+    accessToken,
+    session: await getSession(),
+  };
+};

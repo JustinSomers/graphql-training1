@@ -13,7 +13,9 @@ const account = async (
 
   const availableAvatars: Avatar[] = await getAvailableAvatars(args.username, context);
 
-  mappedAccount.avatars.available = availableAvatars;
+  if (mappedAccount.avatars) {
+    mappedAccount.avatars.available = availableAvatars;
+  }
   return mappedAccount;
 };
 

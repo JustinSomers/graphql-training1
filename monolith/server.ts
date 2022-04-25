@@ -4,6 +4,8 @@ import { loadSchema } from '@graphql-tools/load';
 import { addResolversToSchema } from '@graphql-tools/schema';
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 import { ApolloServer } from 'apollo-server-express';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore: no types lib for graphql-validation-complexity
 import { createComplexityLimitRule } from 'graphql-validation-complexity';
 import express, { Express } from 'express';
 

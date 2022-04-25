@@ -6,6 +6,7 @@ const followTag = async (
   args: MutationFollowTagArgs,
   context: Context,
 ): Promise<FollowTagPayload> => {
+  if (!args.input.tag) throw new Error('no tag');
   const result: FollowTag = await context.dataSources.imgurApi.followTag(args.input.tag);
   return {
     success: result.success,
