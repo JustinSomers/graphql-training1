@@ -11,7 +11,7 @@
     "types": ["node"],
     "baseUrl": ".",
     "paths": {
-      "@monolith/*": ["../monolith/*"]
+      "@monolith/*": ["monolith/*"]
     }
   },
   "include": ["**/*.ts"]
