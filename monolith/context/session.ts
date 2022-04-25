@@ -1,8 +1,8 @@
 import { Session } from '@monolith/context';
 import { redisClient, RedisClientType } from '@monolith/redisClient';
-import ImgurApi from '@monolith/dataSources/imgurApi/imgurApiClient';
+import ImgurApi from '@monolith/dataSources/imgurApi/client';
 import { AccountBase } from '@monolith/dataSources/imgurApi/types';
-import IImgurApi from '@monolith/dataSources/imgurApi/imgurApiClient.interface';
+import IImgurApi from '@monolith/dataSources/imgurApi/client.interface';
 
 const getSession = async (): Promise<Session> => {
   const client: RedisClientType = await redisClient();

@@ -1,5 +1,5 @@
 import Mapper from '@monolith/util/mapper';
-import ImgurAccount from '@monolith/dataSources/imgurApi/types/account.imgurApi';
+import ImgurAccount from '@monolith/dataSources/imgurApi/types/account';
 import { Account } from '@monolith/graphqlTypes';
 
 const mapper = new Mapper<ImgurAccount, Account>();

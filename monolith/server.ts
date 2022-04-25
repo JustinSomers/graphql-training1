@@ -9,7 +9,7 @@ import express, { Express } from 'express';
 
 import resolvers from '@monolith/resolver';
 import config from '@monolith/apolloServerConfig.json';
-import ImgurApi from '@monolith/dataSources/imgurApi/imgurApiClient';
+import ImgurApi from '@monolith/dataSources/imgurApi/client';
 import { context } from '@monolith/context';
 
 (async () => {
