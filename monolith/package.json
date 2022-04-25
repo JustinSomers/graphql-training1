@@ -8,7 +8,7 @@
     "lint:fix": "eslint '**/*.{ts,js}' --fix",
     "start": "concurrently -p \"[{name}]\" -n \"redis,apollo\" -c \"bgBlue.bold,bgRed.bold\" \"npm run startRedis\" \"npm run startServer\"",
     "startRedis": "redis-server",
-    "startServer": "ts-node-dev -r tsconfig-paths/register server.ts",
+    "startServer": "ts-node-dev -r tsconfig-paths/register src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "generate-typings": "graphql-codegen"
   },
