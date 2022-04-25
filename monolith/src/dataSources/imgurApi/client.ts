@@ -1,6 +1,6 @@
-import httpFetch from '@monolith/dataSources/imgurApi/types/fetch';
 import { Response } from 'node-fetch';
 import { RESTDataSource, RequestOptions } from 'apollo-datasource-rest';
+import httpFetch from '@monolith/dataSources/imgurApi/types/fetch';
 import { AccountBase, AvailableAvatars, FollowTag } from '@monolith/dataSources/imgurApi/types';
 import IImgurApi from '@monolith/dataSources/imgurApi/client.interface';
 
@@ -10,7 +10,7 @@ export default class ImgurApi extends RESTDataSource implements IImgurApi {
     this.baseURL = 'https://api.imgur.com';
   }
 
-  willSendRequest(request: RequestOptions): void {
+  override willSendRequest(request: RequestOptions): void {
     request.headers.set('Authorization', this.context.accessToken);
   }
 
