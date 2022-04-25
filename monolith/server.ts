@@ -1,10 +1,11 @@
 import 'dotenv/config';
+import { GraphQLSchema } from 'graphql';
 import { loadSchema } from '@graphql-tools/load';
 import { addResolversToSchema } from '@graphql-tools/schema';
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 import { ApolloServer } from 'apollo-server-express';
 import { createComplexityLimitRule } from 'graphql-validation-complexity';
-import express from 'express';
+import express, { Express } from 'express';
 
 import resolvers from '@monolith/resolver';
 import config from '@monolith/apolloServerConfig.json';
@@ -12,16 +13,16 @@ import ImgurApi from '@monolith/dataSources/imgurApiClient';
 import { context } from '@monolith/context';
 
 (async () => {
-  const expressApp = express();
+  const expressApp: Express = express();
 
-  const schema = await loadSchema('**/*.graphql', {
+  const schema: GraphQLSchema = await loadSchema('**/*.graphql', {
     loaders: [new GraphQLFileLoader()],
   });
-  const schemaWithResolvers = addResolversToSchema({
+  const schemaWithResolvers: GraphQLSchema = addResolversToSchema({
     schema,
     resolvers,
   });
-  const apolloServer = new ApolloServer({
+  const apolloServer: ApolloServer = new ApolloServer({
     dataSources: () => ({
       // dataSources should create a new instance of each data source for each operation
       // apollographql.com/docs/apollo-server/data/data-sources/
