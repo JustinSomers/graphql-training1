@@ -24,6 +24,8 @@ export const context = async ({ req }: ExpressContext): Promise<CustomContext> =
   const accessToken: string | undefined = req.header('Authorization');
   if (!accessToken) throw new Error('no Authorization header');
 
+  console.log('context is being called');
+
   return {
     accessToken,
     session: await getSession(),

@@ -1,6 +1,5 @@
-import { Response } from 'node-fetch';
+import fetch, { Response } from 'node-fetch';
 import { RESTDataSource, RequestOptions } from 'apollo-datasource-rest';
-import httpFetch from '@monolith/dataSources/imgurApi/types/fetch';
 import { AccountBase, AvailableAvatars, FollowTag } from '@monolith/dataSources/imgurApi/types';
 import IImgurApi from '@monolith/dataSources/imgurApi/client.interface';
 
@@ -42,7 +41,7 @@ export default class ImgurApi extends RESTDataSource implements IImgurApi {
   }
 
   async getSession(): Promise<AccountBase> {
-    const response: Response = await httpFetch<AccountBase>(
+    const response: Response = await fetch(
       `${this.baseURL}/3/account/${process.env.USERNAME}`,
       {
         method: 'GET',

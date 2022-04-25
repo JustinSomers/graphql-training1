@@ -1,4 +1,4 @@
-export default class Account {
+type Account = {
   data: {
     id: number,
     url: string,
@@ -17,3 +17,5 @@ export default class Account {
     },
   };
 }
+
+export default Account;
