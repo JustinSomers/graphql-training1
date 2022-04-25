@@ -10,8 +10,10 @@ const getSession = async (): Promise<Session> => {
 
   if (!session) {
     const imgurApi = new ImgurApi();
+    //@ts-ignore
     session = await imgurApi.getSession();
-    await client.set(process.env.USERNAME, JSON.stringify(session));
+    //@ts-ignore
+    await client.set(process.env.USERNAME, JSON.stringify(session.data));
   }
 
   return {
