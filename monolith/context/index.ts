@@ -1,8 +1,16 @@
 import getSession from '@monolith/context/session';
 
-const context = async ({ req }) => ({
+export type Session = {
+  id: number;
+  username: string;
+};
+
+export type Context = {
+  accessToken: string;
+  session: Session;
+};
+
+export const context = async ({ req }): Promise<Context> => ({
   accessToken: req.header('Authorization'),
   session: await getSession(),
 });
-
-export default context;

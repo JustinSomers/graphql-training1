@@ -1,5 +1,5 @@
 import { Account, UserAccountArgs, Resolvers } from '@monolith/graphqlTypes';
-import { account } from '@monolith/service/account/account.service';
+import account from '@monolith/service/account/account.service';
 
 const resolver: Resolvers = {
   User: {

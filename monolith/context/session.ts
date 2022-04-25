@@ -1,7 +1,8 @@
+import { Session } from '@monolith/context';
 import redisClient from '@monolith/redisClient';
 import ImgurApi from '@monolith/imgurApiClient';
 
-const getSession = async () => {
+const getSession = async (): Promise<Session> => {
   const client = await redisClient();
 
   let session = await client.get(process.env.USERNAME);
@@ -13,7 +14,12 @@ const getSession = async () => {
     await client.set(process.env.USERNAME, JSON.stringify(session));
   }
 
-  return session;
+  return {
+    //@ts-ignore
+    id: session.id,
+    //@ts-ignore
+    username: session.username,
+  };
 };
 
 export default getSession;
