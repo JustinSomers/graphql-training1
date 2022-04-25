@@ -1,6 +1,5 @@
 import { Avatar } from '@monolith/graphqlTypes';
 
-// eslint-disable-next-line import/prefer-default-export
 export const currentAvatar = async (parent): Promise<Avatar> => ({
   url: parent.avatar,
   name: parent.avatar_name,

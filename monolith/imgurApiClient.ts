@@ -9,8 +9,7 @@ export default class ImgurApi extends RESTDataSource {
 
   // eslint-disable-next-line class-methods-use-this
   willSendRequest(request) {
-    // TODO: clean this up!
-    request.headers.set('Authorization', 'Bearer 61aaddc7c1d088697ca4ec195d9738c325e2bb6e');
+    request.headers.set('Authorization', this.context.accessToken);
   }
 
   async getAccountBase(username: string) {
@@ -31,13 +30,22 @@ export default class ImgurApi extends RESTDataSource {
     return result;
   }
 
+  async followTag(tag: string) {
+    if (!tag) {
+      throw new Error('No tag');
+    }
+
+    const result = await this.post(`/3/account/me/follow/tag/${tag}`);
+    return result;
+  }
+
   async getSession() {
     const response = await fetch(
       `${this.baseURL}/3/account/${process.env.USERNAME}`,
       {
         method: 'GET',
         headers: {
-          Authorization: `Client-ID ${process.env.CLIENT_ID}`,
+          Authorization: this.context.accessToken,
         },
       },
     );
