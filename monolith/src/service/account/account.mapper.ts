@@ -1,32 +1,33 @@
 import Mapper from '@monolith/util/mapper';
-import ImgurAccount from '@monolith/dataSources/imgurApi/types/account';
+import { Account as ImgurAccount, AccountData } from '@monolith/dataSources/imgurApi/types/account';
 import { Account } from '@monolith/graphqlTypes';
 
 const mapper = new Mapper<ImgurAccount, Account>();
 mapper.map = (apiResult: ImgurAccount) => {
+  const accountData: AccountData = apiResult.data;
   const account: Account = {
-    id: apiResult.data.id,
-    isBlocked: apiResult.data.is_blocked,
+    id: accountData.id,
+    isBlocked: accountData.is_blocked,
     avatars: {
       current: {
-        url: apiResult.data.avatar,
-        name: apiResult.data.avatar_name,
+        url: accountData.avatar,
+        name: accountData.avatar_name,
       },
     },
-    bio: apiResult.data.bio,
+    bio: accountData.bio,
     cover: {
-      cover: apiResult.data.cover,
-      coverName: apiResult.data.cover_name,
+      cover: accountData.cover,
+      coverName: accountData.cover_name,
     },
-    created: apiResult.data.created,
-    proExpiration: apiResult.data.pro_expiration,
+    created: accountData.created,
+    proExpiration: accountData.pro_expiration,
     reputation: {
-      reputation: apiResult.data.reputation,
-      reputationName: apiResult.data.reputation_name,
+      reputation: accountData.reputation,
+      reputationName: accountData.reputation_name,
     },
-    url: apiResult.data.url,
+    url: accountData.url,
     userFollow: {
-      status: apiResult.data.user_follow.status,
+      status: accountData.user_follow.status,
     },
   };
   return account;
