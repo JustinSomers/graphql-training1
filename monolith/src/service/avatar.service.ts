@@ -7,13 +7,10 @@ const getAvailableAvatars = async (
   context: Context,
 ): Promise<Avatar[]> => {
   const result: AvailableAvatars = await context.dataSources.imgurApi.getAvailableAvatars(username);
-  const avatars: Avatar[] = [];
-  result.data.available_avatars.forEach((avatar) => {
-    avatars.push({
-      url: avatar.location,
-      name: avatar.name,
-    });
-  });
+  const avatars: Avatar[] = result.data.available_avatars.map((avatar) => ({
+    url: avatar.location,
+    name: avatar.name,
+  }));
   return avatars;
 };
 
