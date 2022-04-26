@@ -19,13 +19,13 @@ type Account {
 }
 
 type Cover {
-  cover: String
-  coverName: String
+  url: String
+  name: String
 }
 
 type Reputation {
-  reputation: Int
-  reputationName: String
+  score: Int
+  name: String
 }
 
 type UserFollow {

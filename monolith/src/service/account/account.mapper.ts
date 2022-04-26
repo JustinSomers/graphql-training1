@@ -17,14 +17,14 @@ mapper.map = (apiResult: ImgurAccount) => {
     },
     bio: accountData.bio,
     cover: {
-      cover: accountData.cover,
-      coverName: accountData.cover_name,
+      url: accountData.cover,
+      name: accountData.cover_name,
     },
     created: accountData.created,
     proExpiration: accountData.pro_expiration,
     reputation: {
-      reputation: accountData.reputation,
-      reputationName: accountData.reputation_name,
+      score: accountData.reputation,
+      name: accountData.reputation_name,
     },
     url: accountData.url,
     userFollow: {

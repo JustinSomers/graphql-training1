@@ -1,6 +1,6 @@
 type Avatars {
   current: Avatar
-  available: [Avatar]
+  available(username: String): [Avatar]
 }
 
 type Avatar {

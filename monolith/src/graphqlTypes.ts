@@ -33,6 +33,7 @@ export type Account = {
 
 export type AccountImageArgs = {
   id: Scalars['String'];
+  username?: InputMaybe<Scalars['String']>;
 };
 
 export type Avatar = {
@@ -47,14 +48,20 @@ export type Avatars = {
   current?: Maybe<Avatar>;
 };
 
+
+export type AvatarsAvailableArgs = {
+  username?: InputMaybe<Scalars['String']>;
+};
+
 export type Cover = {
   __typename?: 'Cover';
-  cover?: Maybe<Scalars['String']>;
-  coverName?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
 };
 
 export type FollowTagInput = {
   tag?: InputMaybe<Scalars['String']>;
+  username?: InputMaybe<Scalars['String']>;
 };
 
 export type FollowTagPayload = {
@@ -112,8 +119,8 @@ export type Query = {
 
 export type Reputation = {
   __typename?: 'Reputation';
-  reputation?: Maybe<Scalars['Int']>;
-  reputationName?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  score?: Maybe<Scalars['Int']>;
 };
 
 /** Information about the authenticated user (viewer) */
@@ -266,14 +273,14 @@ export type AvatarResolvers<ContextType = any, ParentType extends ResolversParen
 };
 
 export type AvatarsResolvers<ContextType = any, ParentType extends ResolversParentTypes['Avatars'] = ResolversParentTypes['Avatars']> = {
-  available?: Resolver<Maybe<Array<Maybe<ResolversTypes['Avatar']>>>, ParentType, ContextType>;
+  available?: Resolver<Maybe<Array<Maybe<ResolversTypes['Avatar']>>>, ParentType, ContextType, Partial<AvatarsAvailableArgs>>;
   current?: Resolver<Maybe<ResolversTypes['Avatar']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type CoverResolvers<ContextType = any, ParentType extends ResolversParentTypes['Cover'] = ResolversParentTypes['Cover']> = {
-  cover?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  coverName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -321,8 +328,8 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
 };
 
 export type ReputationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Reputation'] = ResolversParentTypes['Reputation']> = {
-  reputation?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  reputationName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  score?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

@@ -34,12 +34,12 @@ export default class ImgurApi extends RESTDataSource implements IImgurApi {
     return result;
   }
 
-  async followTag(tag: string): Promise<FollowTag> {
+  async followTag(username: string, tag: string): Promise<FollowTag> {
     if (!tag) {
       throw new Error('No tag');
     }
 
-    const result: FollowTag = await this.post(`/3/account/me/follow/tag/${tag}`);
+    const result: FollowTag = await this.post(`/3/account/${username}/follow/tag/${tag}`);
     return result;
   }
 

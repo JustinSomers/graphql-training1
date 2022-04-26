@@ -7,7 +7,7 @@ interface IImgurApi {
   willSendRequest(request: RequestOptions): void;
   getAccountBase(username: string): Promise<AccountBase>;
   getAvailableAvatars(username: string): Promise<AvailableAvatars>;
-  followTag(tag: string): Promise<FollowTag>
+  followTag(username:string, tag: string): Promise<FollowTag>
   getImage(username: string, imageId: string): Promise<Image>;
   getSession(): Promise<AccountBase>;
 }

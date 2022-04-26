@@ -28,5 +28,5 @@ type Image {
 }
 
 extend type Account {
-  image(id: String!): Image
+  image(id: String!, username: String): Image
 }
