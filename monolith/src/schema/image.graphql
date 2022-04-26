@@ -1,18 +1,63 @@
 type Image {
+  """
+  The id for the image
+  """
   id: String,
+  """
+  The title of the image
+  """
   title: String,
+  """
+  Description of the image
+  """
   description: String,
+  """
+  Epoch time uploaded
+  """
   datetime: Int,
+  """
+  Image MIME type
+  """
   type: String,
+  """
+  Is the image animated
+  """
   animated: Boolean,
+  """
+  The width of the image in pixels
+  """
   width: Int,
+  """
+  The height of the image in pixels
+  """
   height: Int,
+  """
+  The size of the image in bytes
+  """
   size: Int,
+  """
+  The number of image views
+  """
   views: Int,
+  """
+  Bandwidth consumed by the image in bytes
+  """
   bandwidth: Float,
+  """
+  The current user's vote on the album. null if not signed in, if the user hasn't voted on it, or if not submitted to the gallery.
+  """
   vote: String,
+  """
+  Indicates if the current user favorited the image. Defaults to false if not signed in.
+  """
   favorite: Boolean,
+  """
+  Indicates if the image has been marked as nsfw or not. Defaults to null if information is not available.
+  """
   nsfw: Boolean,
+  """
+  If the image has been categorized by our backend then this will contain the section the image belongs in. (funny, cats, adviceanimals, wtf, etc)
+  """
   section: String,
   is_ad: Boolean,
   in_most_viral: Boolean,
@@ -21,12 +66,27 @@ type Image {
   ad_type: Int,
   ad_url: String,
   edited: String,
+  """
+  True if the image has been submitted to the gallery, false if otherwise.
+  """
   in_gallery: Boolean,
+  """
+  OPTIONAL, the original filename, if you're logged in as the image owner
+  """
   name: String,
+  """
+  OPTIONAL, the deletehash, if you're logged in as the image owner
+  """
   deletehash: String,
+  """
+  The direct link to the the image. (Note: if fetching an animated GIF that was over 20MB in original size, a .gif thumbnail will be returned)
+  """
   link: String
 }
 
 extend type Account {
+  """
+  The base model for an image
+  """
   image(id: String!): Image
 }

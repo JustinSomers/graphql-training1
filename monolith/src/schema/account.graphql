@@ -1,24 +1,42 @@
 extend type User {
   """
-  Account for viewer/currently authed User
+  Account for viewer, the currently authed User
   """
   account: Account
 }
 
 extend type Query {
   """
-  Account lookup via currently authed user's accessToken
+  General account lookup via currently authed user's accessToken
   """
   account(username: String!): Account
 }
 
 type Account {
+  """
+  The account id for the username requested
+  """
   id: Int!
+  """
+  A basic description the user has filled out
+  """
   bio: String
+  """
+  The account username, will be the same as requested in the URL
+  """
   url: String
   cover: Cover
+  """
+  The reputation for the account, in it's numerical and name format
+  """
   reputation: Reputation
+  """
+  The epoch time of account creation
+  """
   created: Int
+  """
+  False if not a pro user, their expiration date if they are
+  """
   proExpiration: Boolean
   userFollow: UserFollow
   isBlocked: Boolean

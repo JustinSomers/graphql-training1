@@ -9,7 +9,7 @@ input FollowTagInput {
 
 extend type Mutation {
   """
-  Update metadata for an Account.
+  Follows the tag specified for the currently logged in user.
   """
   followTag(input: FollowTagInput!): FollowTagPayload
 }

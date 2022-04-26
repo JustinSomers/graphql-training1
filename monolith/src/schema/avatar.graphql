@@ -9,5 +9,8 @@ type Avatar {
 }
 
 extend type Account {
+  """
+  Current and Available avatars associated with this user's account
+  """
   avatars: Avatars
 }

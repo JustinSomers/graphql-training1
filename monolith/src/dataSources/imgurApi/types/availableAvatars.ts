@@ -1,10 +1,10 @@
-type AvailableAvatarsNameAndLocation = {
+type Avatar = {
   name: string
   location: string
 }
 
 type AvailableAvatarsData = {
-  available_avatars: AvailableAvatarsNameAndLocation[]
+  available_avatars: Avatar[]
   available_avatars_count: number
   avatars_are_default: boolean
 }

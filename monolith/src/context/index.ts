@@ -1,6 +1,7 @@
+import { ExpressContext } from 'apollo-server-express';
 import getSession from '@monolith/context/session';
 import IImgurApi from '@monolith/dataSources/imgurApi/client.interface';
-import { ExpressContext } from 'apollo-server-express';
+import errorConstants from '@monolith/util/errorConstants';
 
 export type Session = {
   id: number;
@@ -22,8 +23,8 @@ export type Context = CustomContext & DataSourceContext;
 
 export const context = async ({ req }: ExpressContext): Promise<CustomContext> => {
   const accessToken: string | undefined = req.header('Authorization');
-  if (!accessToken) throw new Error('No Authorization header');
-  if (!process.env.USERNAME) throw new Error('no process env var username');
+  if (!accessToken) throw new Error(errorConstants.NO_AUTH_HEADER);
+  if (!process.env.USERNAME) throw new Error(errorConstants.NO_USERNAME_ENV_VAR);
 
   return {
     accessToken,
