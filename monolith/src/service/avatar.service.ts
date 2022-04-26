@@ -1,12 +1,17 @@
-import { Avatar } from '@monolith/graphqlTypes';
+import { Avatar, Avatars } from '@monolith/graphqlTypes';
 import { Context } from '@monolith/context';
-import { AvailableAvatars } from '@monolith/dataSources/imgurApi/types';
+import { AccountBase, AvailableAvatars } from '@monolith/dataSources/imgurApi/types';
 
 const getAvailableAvatars = async (
-  username: string,
+  parent: Avatars,
   context: Context,
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
 ): Promise<Avatar[]> => {
-  const result: AvailableAvatars = await context.dataSources.imgurApi.getAvailableAvatars(username);
+  console.log(parent);
+  const result: AvailableAvatars = await context.dataSources.imgurApi.getAvailableAvatars(
+    'hikesdogsbeers',
+  );
   const avatars: Avatar[] = result.data.available_avatars.map((avatar) => ({
     url: avatar.location,
     name: avatar.name,
@@ -14,4 +19,26 @@ const getAvailableAvatars = async (
   return avatars;
 };
 
-export default getAvailableAvatars;
+const getCurrentAvatar = async (
+  parent: Avatars,
+  context: Context,
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+): Promise<Avatar> => {
+  console.log(parent);
+  if (!parent.current) {
+    const result: AccountBase = await context.dataSources.imgurApi.getAccountBase(
+      'hikesdogsbeers',
+    );
+    return {
+      name: result.data.avatar_name,
+      url: result.data.avatar,
+    };
+  }
+  return parent.current;
+};
+
+export {
+  getAvailableAvatars,
+  getCurrentAvatar,
+};

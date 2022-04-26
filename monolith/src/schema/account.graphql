@@ -6,10 +6,10 @@ extend type User {
 }
 
 type Account {
-  id: Int
+  id: Int!
+  username: String!
   bio: String
   url: String
-  avatars: Avatars
   cover: Cover
   reputation: Reputation
   created: Int
@@ -19,13 +19,13 @@ type Account {
 }
 
 type Cover {
-  cover: String
-  coverName: String
+  url: String
+  name: String
 }
 
 type Reputation {
-  reputation: Int
-  reputationName: String
+  score: Int
+  name: String
 }
 
 type UserFollow {

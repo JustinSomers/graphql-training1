@@ -3,6 +3,7 @@ type FollowTagPayload {
 }
 
 input FollowTagInput {
+  username: String
   tag: String
 }
 

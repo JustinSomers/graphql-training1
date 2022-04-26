@@ -7,7 +7,11 @@ const followTag = async (
   context: Context,
 ): Promise<FollowTagPayload> => {
   if (!args.input.tag) throw new Error('no tag');
-  const result: FollowTag = await context.dataSources.imgurApi.followTag(args.input.tag);
+  if (!args.input.username) throw new Error('no username');
+  const result: FollowTag = await context.dataSources.imgurApi.followTag(
+    args.input.username,
+    args.input.tag,
+  );
   return {
     success: result.success,
   };

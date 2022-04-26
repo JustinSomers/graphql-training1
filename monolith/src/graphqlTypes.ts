@@ -20,12 +20,20 @@ export type Account = {
   bio?: Maybe<Scalars['String']>;
   cover?: Maybe<Cover>;
   created?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
+  id: Scalars['Int'];
+  image?: Maybe<Image>;
   isBlocked?: Maybe<Scalars['Boolean']>;
   proExpiration?: Maybe<Scalars['Boolean']>;
   reputation?: Maybe<Reputation>;
   url?: Maybe<Scalars['String']>;
   userFollow?: Maybe<UserFollow>;
+  username: Scalars['String'];
+};
+
+
+export type AccountImageArgs = {
+  id: Scalars['String'];
+  username?: InputMaybe<Scalars['String']>;
 };
 
 export type Avatar = {
@@ -40,19 +48,55 @@ export type Avatars = {
   current?: Maybe<Avatar>;
 };
 
+
+export type AvatarsAvailableArgs = {
+  username?: InputMaybe<Scalars['String']>;
+};
+
 export type Cover = {
   __typename?: 'Cover';
-  cover?: Maybe<Scalars['String']>;
-  coverName?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
 };
 
 export type FollowTagInput = {
   tag?: InputMaybe<Scalars['String']>;
+  username?: InputMaybe<Scalars['String']>;
 };
 
 export type FollowTagPayload = {
   __typename?: 'FollowTagPayload';
   success?: Maybe<Scalars['Boolean']>;
+};
+
+export type Image = {
+  __typename?: 'Image';
+  ad_type?: Maybe<Scalars['Int']>;
+  ad_url?: Maybe<Scalars['String']>;
+  animated?: Maybe<Scalars['Boolean']>;
+  bandwidth?: Maybe<Scalars['Float']>;
+  datetime?: Maybe<Scalars['Int']>;
+  deletehash?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  edited?: Maybe<Scalars['String']>;
+  favorite?: Maybe<Scalars['Boolean']>;
+  has_sound?: Maybe<Scalars['Boolean']>;
+  height?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['String']>;
+  in_gallery?: Maybe<Scalars['Boolean']>;
+  in_most_viral?: Maybe<Scalars['Boolean']>;
+  is_ad?: Maybe<Scalars['Boolean']>;
+  link?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  nsfw?: Maybe<Scalars['Boolean']>;
+  section?: Maybe<Scalars['String']>;
+  size?: Maybe<Scalars['Int']>;
+  tags?: Maybe<Array<Maybe<Scalars['String']>>>;
+  title?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  views?: Maybe<Scalars['Int']>;
+  vote?: Maybe<Scalars['String']>;
+  width?: Maybe<Scalars['Int']>;
 };
 
 export type Mutation = {
@@ -75,8 +119,8 @@ export type Query = {
 
 export type Reputation = {
   __typename?: 'Reputation';
-  reputation?: Maybe<Scalars['Int']>;
-  reputationName?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  score?: Maybe<Scalars['Int']>;
 };
 
 /** Information about the authenticated user (viewer) */
@@ -173,8 +217,10 @@ export type ResolversTypes = {
   Avatars: ResolverTypeWrapper<Avatars>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Cover: ResolverTypeWrapper<Cover>;
+  Float: ResolverTypeWrapper<Scalars['Float']>;
   FollowTagInput: FollowTagInput;
   FollowTagPayload: ResolverTypeWrapper<FollowTagPayload>;
+  Image: ResolverTypeWrapper<Image>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
@@ -191,8 +237,10 @@ export type ResolversParentTypes = {
   Avatars: Avatars;
   Boolean: Scalars['Boolean'];
   Cover: Cover;
+  Float: Scalars['Float'];
   FollowTagInput: FollowTagInput;
   FollowTagPayload: FollowTagPayload;
+  Image: Image;
   Int: Scalars['Int'];
   Mutation: {};
   Query: {};
@@ -207,12 +255,14 @@ export type AccountResolvers<ContextType = any, ParentType extends ResolversPare
   bio?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   cover?: Resolver<Maybe<ResolversTypes['Cover']>, ParentType, ContextType>;
   created?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  image?: Resolver<Maybe<ResolversTypes['Image']>, ParentType, ContextType, RequireFields<AccountImageArgs, 'id'>>;
   isBlocked?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   proExpiration?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   reputation?: Resolver<Maybe<ResolversTypes['Reputation']>, ParentType, ContextType>;
   url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   userFollow?: Resolver<Maybe<ResolversTypes['UserFollow']>, ParentType, ContextType>;
+  username?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -223,19 +273,49 @@ export type AvatarResolvers<ContextType = any, ParentType extends ResolversParen
 };
 
 export type AvatarsResolvers<ContextType = any, ParentType extends ResolversParentTypes['Avatars'] = ResolversParentTypes['Avatars']> = {
-  available?: Resolver<Maybe<Array<Maybe<ResolversTypes['Avatar']>>>, ParentType, ContextType>;
+  available?: Resolver<Maybe<Array<Maybe<ResolversTypes['Avatar']>>>, ParentType, ContextType, Partial<AvatarsAvailableArgs>>;
   current?: Resolver<Maybe<ResolversTypes['Avatar']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type CoverResolvers<ContextType = any, ParentType extends ResolversParentTypes['Cover'] = ResolversParentTypes['Cover']> = {
-  cover?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  coverName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type FollowTagPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['FollowTagPayload'] = ResolversParentTypes['FollowTagPayload']> = {
   success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ImageResolvers<ContextType = any, ParentType extends ResolversParentTypes['Image'] = ResolversParentTypes['Image']> = {
+  ad_type?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  ad_url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  animated?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  bandwidth?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  datetime?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  deletehash?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  edited?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  favorite?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  has_sound?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  height?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  in_gallery?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  in_most_viral?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  is_ad?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  link?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  nsfw?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  section?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  size?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  tags?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
+  title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  views?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  vote?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  width?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -248,8 +328,8 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
 };
 
 export type ReputationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Reputation'] = ResolversParentTypes['Reputation']> = {
-  reputation?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  reputationName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  score?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -271,6 +351,7 @@ export type Resolvers<ContextType = any> = {
   Avatars?: AvatarsResolvers<ContextType>;
   Cover?: CoverResolvers<ContextType>;
   FollowTagPayload?: FollowTagPayloadResolvers<ContextType>;
+  Image?: ImageResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Reputation?: ReputationResolvers<ContextType>;

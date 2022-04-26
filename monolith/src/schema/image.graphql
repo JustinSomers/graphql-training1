@@ -1,0 +1,32 @@
+type Image {
+  id: String,
+  title: String,
+  description: String,
+  datetime: Int,
+  type: String,
+  animated: Boolean,
+  width: Int,
+  height: Int,
+  size: Int,
+  views: Int,
+  bandwidth: Float,
+  vote: String,
+  favorite: Boolean,
+  nsfw: Boolean,
+  section: String,
+  is_ad: Boolean,
+  in_most_viral: Boolean,
+  has_sound: Boolean,
+  tags: [String],
+  ad_type: Int,
+  ad_url: String,
+  edited: String,
+  in_gallery: Boolean,
+  name: String,
+  deletehash: String,
+  link: String
+}
+
+extend type Account {
+  image(id: String!, username: String): Image
+}

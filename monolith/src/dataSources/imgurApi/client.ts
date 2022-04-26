@@ -1,6 +1,8 @@
 import fetch, { Response } from 'node-fetch';
 import { RESTDataSource, RequestOptions } from 'apollo-datasource-rest';
-import { AccountBase, AvailableAvatars, FollowTag } from '@monolith/dataSources/imgurApi/types';
+import {
+  AccountBase, AvailableAvatars, FollowTag, ImagesResponse, Image,
+} from '@monolith/dataSources/imgurApi/types';
 import IImgurApi from '@monolith/dataSources/imgurApi/client.interface';
 
 export default class ImgurApi extends RESTDataSource implements IImgurApi {
@@ -19,6 +21,7 @@ export default class ImgurApi extends RESTDataSource implements IImgurApi {
     }
 
     const result: AccountBase = await this.get(`/3/account/${username}`);
+    result.data.username = username;
     return result;
   }
 
@@ -31,13 +34,22 @@ export default class ImgurApi extends RESTDataSource implements IImgurApi {
     return result;
   }
 
-  async followTag(tag: string): Promise<FollowTag> {
+  async followTag(username: string, tag: string): Promise<FollowTag> {
     if (!tag) {
       throw new Error('No tag');
     }
 
-    const result: FollowTag = await this.post(`/3/account/me/follow/tag/${tag}`);
+    const result: FollowTag = await this.post(`/3/account/${username}/follow/tag/${tag}`);
     return result;
+  }
+
+  async getImage(username: string, imageId: string): Promise<Image> {
+    if (!username) {
+      throw new Error('No username');
+    }
+
+    const result: ImagesResponse = await this.get(`/3/account/${username}/image/${imageId}`); // N9gEpVG
+    return result.data;
   }
 
   async getSession(): Promise<AccountBase> {

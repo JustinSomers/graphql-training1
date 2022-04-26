@@ -4,6 +4,7 @@ type UserFollow = {
 
 type AccountBaseData = {
   id: number
+  username: string
   url: string
   bio: string
   avatar: string

@@ -1,9 +1,13 @@
 type Avatars {
   current: Avatar
-  available: [Avatar]
+  available(username: String): [Avatar]
 }
 
 type Avatar {
   url: String
   name: String
+}
+
+extend type Account {
+  avatars: Avatars
 }
