@@ -1,14 +1,13 @@
-import { Image, AccountImageArgs, Account } from '@monolith/graphqlTypes';
+import { Image, AccountImageArgs } from '@monolith/graphqlTypes';
 import { Context } from '@monolith/context';
 
 const getImage = async (
-  parent: Account,
   args: AccountImageArgs,
   context: Context,
 ): Promise<Image> => {
-  const username = args.username || parent.username;
-  const result: Image = await context.dataSources.imgurApi.getImage(username, args.id);
-  return result;
+  const { username } = context;
+  const image: Image = await context.dataSources.imgurApi.getImage(username, args.id);
+  return image;
 };
 
 export default getImage;

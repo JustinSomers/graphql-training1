@@ -7,11 +7,11 @@ import getImage from '@monolith/service/image.service';
 const resolver: Resolvers = {
   Account: {
     image: async (
-      parent: Account,
+      _parent: Account,
       args: AccountImageArgs,
       context: Context,
     ): Promise<Image> => (
-      getImage(parent, args, context)
+      getImage(args, context)
     ),
   },
 };

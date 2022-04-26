@@ -4,7 +4,6 @@ import { ExpressContext } from 'apollo-server-express';
 
 export type Session = {
   id: number;
-  username: string;
 };
 
 type DataSourceContext = {
@@ -16,16 +15,19 @@ type DataSourceContext = {
 export type CustomContext = {
   accessToken: string;
   session: Session;
+  username: string;
 };
 
 export type Context = CustomContext & DataSourceContext;
 
 export const context = async ({ req }: ExpressContext): Promise<CustomContext> => {
   const accessToken: string | undefined = req.header('Authorization');
-  if (!accessToken) throw new Error('no Authorization header');
+  if (!accessToken) throw new Error('No Authorization header');
+  if (!process.env.USERNAME) throw new Error('no process env var username');
 
   return {
     accessToken,
     session: await getSession(),
+    username: process.env.USERNAME,
   };
 };

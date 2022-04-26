@@ -1,13 +1,19 @@
 extend type User {
   """
-  Retrieve account by username
+  Account for viewer/currently authed User
   """
-  account(username: String): Account
+  account: Account
+}
+
+extend type Query {
+  """
+  Account lookup via currently authed user's accessToken
+  """
+  account(username: String!): Account
 }
 
 type Account {
   id: Int!
-  username: String!
   bio: String
   url: String
   cover: Cover
