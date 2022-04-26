@@ -50,7 +50,7 @@ export type Avatars = {
 
 
 export type AvatarsAvailableArgs = {
-  username?: InputMaybe<Scalars['String']>;
+  username: Scalars['String'];
 };
 
 export type Cover = {
@@ -273,7 +273,7 @@ export type AvatarResolvers<ContextType = any, ParentType extends ResolversParen
 };
 
 export type AvatarsResolvers<ContextType = any, ParentType extends ResolversParentTypes['Avatars'] = ResolversParentTypes['Avatars']> = {
-  available?: Resolver<Maybe<Array<Maybe<ResolversTypes['Avatar']>>>, ParentType, ContextType, Partial<AvatarsAvailableArgs>>;
+  available?: Resolver<Maybe<Array<Maybe<ResolversTypes['Avatar']>>>, ParentType, ContextType, RequireFields<AvatarsAvailableArgs, 'username'>>;
   current?: Resolver<Maybe<ResolversTypes['Avatar']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };

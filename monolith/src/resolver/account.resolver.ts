@@ -1,4 +1,6 @@
-import { Account, UserAccountArgs, Resolvers, User } from '@monolith/graphqlTypes';
+import {
+  Account, UserAccountArgs, Resolvers, User,
+} from '@monolith/graphqlTypes';
 import account from '@monolith/service/account/account.service';
 import { Context } from '@monolith/context';
 

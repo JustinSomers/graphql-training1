@@ -6,7 +6,8 @@ const getImage = async (
   args: AccountImageArgs,
   context: Context,
 ): Promise<Image> => {
-  const result: Image = await context.dataSources.imgurApi.getImage(parent.username, args.id);
+  const username = args.username || parent.username;
+  const result: Image = await context.dataSources.imgurApi.getImage(username, args.id);
   return result;
 };
 

@@ -1,9 +1,8 @@
 import { Context } from '@monolith/context';
 import {
-  Account, /* Image, */ User, UserAccountArgs,
+  Account, User, UserAccountArgs,
 } from '@monolith/graphqlTypes';
 import accountMapper from '@monolith/service/account/account.mapper';
-// import getImage from '@monolith/service/image.service';
 import { AccountBase } from '@monolith/dataSources/imgurApi/types';
 
 const account = async (
