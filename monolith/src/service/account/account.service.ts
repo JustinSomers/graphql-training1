@@ -8,10 +8,17 @@ const account = async (
   args: UserAccountArgs,
   context: Context,
 ): Promise<Account> => {
-  const accountBase: AccountBase = await context.dataSources.imgurApi.getAccountBase(args.username);
+  if (!process.env.USERNAME) throw new Error('No username env var');
+
+  let { username } = args;
+  if (!username) {
+    username = process.env.USERNAME;
+  }
+
+  const accountBase: AccountBase = await context.dataSources.imgurApi.getAccountBase(username);
   const mappedAccount: Account = accountMapper.map(accountBase);
 
-  const availableAvatars: Avatar[] = await getAvailableAvatars(args.username, context);
+  const availableAvatars: Avatar[] = await getAvailableAvatars(username, context);
 
   if (mappedAccount.avatars) {
     mappedAccount.avatars.available = availableAvatars;
