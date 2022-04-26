@@ -9,7 +9,6 @@ type Account {
   id: Int
   bio: String
   url: String
-  avatars: Avatars
   cover: Cover
   reputation: Reputation
   created: Int

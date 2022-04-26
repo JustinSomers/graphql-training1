@@ -7,3 +7,7 @@ type Avatar {
   url: String
   name: String
 }
+
+extend type Account {
+  avatars: Avatars
+}
