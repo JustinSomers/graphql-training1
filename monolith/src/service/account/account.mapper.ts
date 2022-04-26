@@ -7,6 +7,7 @@ mapper.map = (apiResult: ImgurAccount) => {
   const accountData: AccountData = apiResult.data;
   const account: Account = {
     id: accountData.id,
+    username: accountData.username,
     isBlocked: accountData.is_blocked,
     avatars: {
       current: {

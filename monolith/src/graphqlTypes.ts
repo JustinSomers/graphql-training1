@@ -20,13 +20,19 @@ export type Account = {
   bio?: Maybe<Scalars['String']>;
   cover?: Maybe<Cover>;
   created?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  images?: Maybe<Array<Maybe<Image>>>;
+  id: Scalars['Int'];
+  image?: Maybe<Image>;
   isBlocked?: Maybe<Scalars['Boolean']>;
   proExpiration?: Maybe<Scalars['Boolean']>;
   reputation?: Maybe<Reputation>;
   url?: Maybe<Scalars['String']>;
   userFollow?: Maybe<UserFollow>;
+  username: Scalars['String'];
+};
+
+
+export type AccountImageArgs = {
+  id: Scalars['String'];
 };
 
 export type Avatar = {
@@ -61,7 +67,7 @@ export type Image = {
   ad_type?: Maybe<Scalars['Int']>;
   ad_url?: Maybe<Scalars['String']>;
   animated?: Maybe<Scalars['Boolean']>;
-  bandwidth?: Maybe<Scalars['Int']>;
+  bandwidth?: Maybe<Scalars['Float']>;
   datetime?: Maybe<Scalars['Int']>;
   deletehash?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
@@ -204,6 +210,7 @@ export type ResolversTypes = {
   Avatars: ResolverTypeWrapper<Avatars>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Cover: ResolverTypeWrapper<Cover>;
+  Float: ResolverTypeWrapper<Scalars['Float']>;
   FollowTagInput: FollowTagInput;
   FollowTagPayload: ResolverTypeWrapper<FollowTagPayload>;
   Image: ResolverTypeWrapper<Image>;
@@ -223,6 +230,7 @@ export type ResolversParentTypes = {
   Avatars: Avatars;
   Boolean: Scalars['Boolean'];
   Cover: Cover;
+  Float: Scalars['Float'];
   FollowTagInput: FollowTagInput;
   FollowTagPayload: FollowTagPayload;
   Image: Image;
@@ -240,13 +248,14 @@ export type AccountResolvers<ContextType = any, ParentType extends ResolversPare
   bio?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   cover?: Resolver<Maybe<ResolversTypes['Cover']>, ParentType, ContextType>;
   created?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  images?: Resolver<Maybe<Array<Maybe<ResolversTypes['Image']>>>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  image?: Resolver<Maybe<ResolversTypes['Image']>, ParentType, ContextType, RequireFields<AccountImageArgs, 'id'>>;
   isBlocked?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   proExpiration?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   reputation?: Resolver<Maybe<ResolversTypes['Reputation']>, ParentType, ContextType>;
   url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   userFollow?: Resolver<Maybe<ResolversTypes['UserFollow']>, ParentType, ContextType>;
+  username?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -277,7 +286,7 @@ export type ImageResolvers<ContextType = any, ParentType extends ResolversParent
   ad_type?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   ad_url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   animated?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  bandwidth?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  bandwidth?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   datetime?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   deletehash?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;

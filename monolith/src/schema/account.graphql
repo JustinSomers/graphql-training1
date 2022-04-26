@@ -6,7 +6,8 @@ extend type User {
 }
 
 type Account {
-  id: Int
+  id: Int!
+  username: String!
   bio: String
   url: String
   cover: Cover

@@ -1,5 +1,6 @@
 export type AccountData = {
   id: number,
+  username: string,
   url: string,
   is_blocked: boolean,
   avatar: string,

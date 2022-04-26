@@ -9,7 +9,7 @@ type Image {
   height: Int,
   size: Int,
   views: Int,
-  bandwidth: Int,
+  bandwidth: Float,
   vote: String,
   favorite: Boolean,
   nsfw: Boolean,
@@ -28,5 +28,5 @@ type Image {
 }
 
 extend type Account {
-  images: [Image]
+  image(id: String!): Image
 }
