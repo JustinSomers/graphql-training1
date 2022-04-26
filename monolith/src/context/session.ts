@@ -21,7 +21,6 @@ const getSession = async (): Promise<Session> => {
 
   return {
     id: session.data.id,
-    username: process.env.USERNAME,
   };
 };
 
