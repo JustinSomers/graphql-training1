@@ -1,31 +1,29 @@
-# README #
+# GRAPHQL TRAINING #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+This is a traning repository to teach best practices for Apollo Server in a GraphQL Monolith.
 
-### What is this repository for? ###
+### Who is this repository for? ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+This repository does not assume any GraphQL knowledge, but does assume basic knowledge in the following:
+* NodeJS + Express
+* Typescript
+* Installing via npm and brew
 
 ### How do I get set up? ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+* [Install homebrew](https://brew.sh/)
+* brew install redis
+* Install latest NodeJS LTS (even version)
+** You should probably never install an odd version of NodeJS unless you have a good reason. [Here's why.](https://nodejs.org/en/about/releases/)
+** NodeJS includes a package manager named [npm](https://www.npmjs.com/) which we'll be using extensively.
+** [nvm](https://github.com/nvm-sh/nvm) is great, you should consider using it.
+* Sign up for an [Imgur account](https://imgur.com/).
 
-### Contribution guidelines ###
+### What's in here? ###
 
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+* Getting Started
+** This is the output of [this page](https://www.apollographql.com/docs/apollo-server/getting-started/) and is a good first look at GraphQL. We'll discuss this one-file graphql server fully in the course.
+* Monolith
+** This is pretty close to a real-world example of a GraphQL Monolith. It's "pretty close" because we're manually inputting the info a client would usually send us in the .env file. This GraphQL Monolith is wrapping the [Imgur REST API](https://apidocs.imgur.com/).
 
 testin
