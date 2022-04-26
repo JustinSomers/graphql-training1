@@ -2,7 +2,7 @@ extend type User {
   """
   Retrieve account by username
   """
-  account(username: String!): Account
+  account(username: String): Account
 }
 
 type Account {

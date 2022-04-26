@@ -91,7 +91,7 @@ export type User = {
 
 /** Information about the authenticated user (viewer) */
 export type UserAccountArgs = {
-  username: Scalars['String'];
+  username?: InputMaybe<Scalars['String']>;
 };
 
 export type UserFollow = {
@@ -254,7 +254,7 @@ export type ReputationResolvers<ContextType = any, ParentType extends ResolversP
 };
 
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
-  account?: Resolver<Maybe<ResolversTypes['Account']>, ParentType, ContextType, RequireFields<UserAccountArgs, 'username'>>;
+  account?: Resolver<Maybe<ResolversTypes['Account']>, ParentType, ContextType, Partial<UserAccountArgs>>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   username?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
