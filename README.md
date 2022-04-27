@@ -23,6 +23,10 @@ This repository does not assume any GraphQL knowledge, but does assume basic kno
 * Click "Run in Postman" on [this page](https://apidocs.imgur.com/) to get the Imgur Postman collection.
 * Get the CLIENT_ID from Kyle Banner.
 * Put the CLIENT_ID and USERNAME in a new .env file in the root of the /monolith directory following the .env.example
+* If you're going to open in VSCode navigate to /monolith first. This is because of the way tsconfig is set up.
+    * I want to make sure you read that. `cd monolith` then `code .` please. Don't open the root dir to look at monolith files.
+* npm install
+* npm start
 
 ### What's in here? ###
 
