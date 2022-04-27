@@ -22,7 +22,7 @@ This repository does not assume any GraphQL knowledge, but does assume basic kno
 * Get [Postman](https://www.postman.com/).
 * Click "Run in Postman" on [this page](https://apidocs.imgur.com/) to get the Imgur Postman collection.
 * Get the CLIENT_ID from Kyle Banner.
-* Put the CLIENT_ID and USERNAME in a new .env file following the .env.example
+* Put the CLIENT_ID and USERNAME in a new .env file in the root of the /monolith directory following the .env.example
 
 ### What's in here? ###
 
