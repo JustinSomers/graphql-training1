@@ -21,7 +21,7 @@ This repository does not assume any GraphQL knowledge, but does assume basic kno
 * Sign up for an [Imgur account](https://imgur.com/).
 * Get [Postman](https://www.postman.com/).
 * Click "Run in Postman" on [this page](https://apidocs.imgur.com/) to get the Imgur Postman collection.
-* The CLIENT_ID (Client ID is a public identifier of your application) in the .env.example file is the real CLIENT_ID. Put the CLIENT_ID and your USERNAME (change it from bullwinkle) in a new .env file in the root of the /monolith directory following the .env.example.
+* The CLIENT_ID (Client ID is a public identifier) in the .env.example file is the real CLIENT_ID. Put the CLIENT_ID and your USERNAME (change it from bullwinkle) in a new .env file in the root of the /monolith directory following the .env.example.
 * There are two separate directories, gettingStarted and monolith. cd in to each, npm install, and npm start in each. Verify that the servers actually start.
 
 ### What's in here? ###
