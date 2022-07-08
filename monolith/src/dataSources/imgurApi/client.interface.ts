@@ -9,6 +9,7 @@ interface IImgurApi {
   getAvailableAvatars(username: string): Promise<AvailableAvatars>;
   followTag(username:string, tag: string): Promise<FollowTag>
   getImage(username: string, imageId: string): Promise<Image>;
+  getComments(username: string): Promise<Comment[]>;
   getSession(): Promise<AccountBase>;
 }
 

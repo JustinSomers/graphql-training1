@@ -1,7 +1,7 @@
 import fetch, { Response } from 'node-fetch';
 import { RESTDataSource, RequestOptions } from 'apollo-datasource-rest';
 import {
-  AccountBase, AvailableAvatars, FollowTag, ImagesResponse, Image,
+  AccountBase, AvailableAvatars, FollowTag, ImagesResponse, Image, ImgurCommentResponse,
 } from '@monolith/dataSources/imgurApi/types';
 import IImgurApi from '@monolith/dataSources/imgurApi/client.interface';
 import errorConstants from '@monolith/util/errorConstants';
@@ -50,6 +50,13 @@ export default class ImgurApi extends RESTDataSource implements IImgurApi {
     }
 
     const result: ImagesResponse = await this.get(`/3/account/${username}/image/${imageId}`); // N9gEpVG
+    return result.data;
+  }
+
+  async getComments(username: string): Promise<Comment[]> {
+    const result: ImgurCommentResponse = await this.get(`/3/account/${username}/comments/`);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     return result.data;
   }
 

@@ -1,0 +1,22 @@
+extend type Account {
+  comments: [Comment]
+}
+
+type Comment {
+  """
+  The id of the comment itself
+  """
+  id: ID!
+  """
+  The id of the image associated with the comment
+  """
+  image_id: String
+  """
+  The comment string contents
+  """
+  comment: String
+  """
+  The author of the comment
+  """
+  author: String
+}
