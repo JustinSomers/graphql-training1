@@ -1,0 +1,22 @@
+{
+  "name": "service-library",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rimraf lib && tsc -p"
+  },
+  "files": [
+    "lib/**/*"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-datasource-rest": "^3.5.2",
+    "apollo-server-express": "^3.9.0",
+    "node-fetch": "^3.2.10",
+    "rimraf": "^3.0.2",
+    "typescript": "~4.1.6"
+  }
+}
