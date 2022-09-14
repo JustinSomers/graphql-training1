@@ -1,10 +1,10 @@
 import {
     Account, QueryAccountArgs, Resolvers, User,
-  } from '../typings/graphqlTypes';
-  import account from '../service/account.service';
-  import { Context } from '../context/';
+  } from 'src/graphqlTypes';
+  import account from 'src/service/account.service';
+  import { Context } from 'src/context';
   
-  const AccountResolver: Resolvers = {
+  const resolver: Resolvers = {
     User: {
       account: async (parent: User, _args, context: Context): Promise<Account> => {
         context.username = parent.username;
@@ -19,5 +19,5 @@ import {
     },
   };
   
-  export default AccountResolver;
+  export default resolver;
   

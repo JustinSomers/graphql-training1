@@ -13,10 +13,12 @@ export default class ImgurApi extends RESTDataSource implements IImgurApi {
   }
 
   override willSendRequest(request: RequestOptions): void {
-    request.headers.set('Authorization', this.context.accessToken);
+    console.log('willSendRequest: ' + this.context.accessToken);
+    request.headers.set('Authorization', this.context.clientId);
   }
 
   async getAccountBase(username: string): Promise<AccountBase> {
+    console.log(`getAccountBase username: ${username}`);
     if (!username) {
       throw new Error(errorConstants.NO_USERNAME);
     }
@@ -60,17 +62,20 @@ export default class ImgurApi extends RESTDataSource implements IImgurApi {
     return result.data;
   }
 
-  async getSession(): Promise<AccountBase> {
+  async getSession(username: string, clientId: string): Promise<AccountBase> {
+    console.log(`getSession: username: ${username}, clientId: ${clientId}`)
     const response: Response = await fetch(
-      `${this.baseURL}/3/account/${process.env.USERNAME}`,
+      `${this.baseURL}/3/account/${username}`,
       {
         method: 'GET',
         headers: {
-          Authorization: `Client-ID ${process.env.CLIENT_ID}`,
+          Authorization: `Client-ID ${clientId}`,
         },
       },
     );
     let responseJson: AccountBase = await response.json() as AccountBase;
+    console.log(responseJson);
+
     return responseJson;
   }
 }

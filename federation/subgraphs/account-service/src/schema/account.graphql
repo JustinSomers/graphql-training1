@@ -1,15 +1,14 @@
 type User {
   id: Int!
   username: String!
-    """
+  """
   Account for viewer, the currently authed User
   """
   account: Account
-
 }
 
 type Query {
-"""
+  """
   General account lookup via currently authed user's accessToken
   """
   account(username: String!): Account
@@ -43,7 +42,7 @@ type Account {
   proExpiration: Boolean
   userFollow: UserFollow
   isBlocked: Boolean
-  avatars: Avatars @external
+  avatars: Avatars
 }
 
 type Avatars {

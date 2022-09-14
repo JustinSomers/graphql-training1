@@ -1,12 +1,13 @@
-import { Context } from '../context';
+import { Context } from '../context/index';
 import { Account } from '../typings/graphqlTypes';
 import accountMapper from './account.mapper';
-import { AccountBase} from 'service-library';
+import { AccountBase } from '../dataSources/';
 
 const account = async (
   username: string,
   context: Context,
 ): Promise<Account> => {
+  console.log(context);
   const accountBase: AccountBase = await context.dataSources.imgurApi.getAccountBase(username);
   const mappedAccount: Account = accountMapper.map(accountBase);
 

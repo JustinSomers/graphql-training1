@@ -10,7 +10,7 @@ import {
   Image,
 } from "./dataSources";
 
-import { getSession, errorConstants } from "./util";
+import { getSession, errorConstants, buildSchemas } from "./util";
 
 export {
   ImgurApi,
@@ -24,4 +24,5 @@ export {
   Image,
   getSession,
   errorConstants,
+  buildSchemas
 };

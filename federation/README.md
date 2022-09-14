@@ -27,4 +27,55 @@ Each service and your gateway will need to be ran at the same time.  Locally, th
 
 To use the script, run `chmod +x` on mac / linux machines to add the executable permission to the script.  Then you can type `./startfed` in the root of the federation folder to run the script
 
+
+## Developing the Gateway
+First we will create a config object.
+
+Lets start building the subgraph services.  This seciton will create a introspection query - that will send a request to all the specified subgraphs and build the required information to the gateway.
+Lets add this line to the config object:
+```
+buildService({ name, url }) {
+    return new AuthenticatedDataSource({ url });
+  },
+```
+This will build each service.  But first, we will need to also create a new class - AuthenticatedDAtaSource.  Lets create a new file - `authenticatedDataSource.ts` in the root of the `/gateway` folder.
+
+Go ahead and paste the following in the `authenticatedDataSource.ts` file.
+```
+    import { RemoteGraphQLDataSource } from "@apollo/gateway";
+
+    class AuthenticatedDataSource extends RemoteGraphQLDataSource {
+        // @ts-ignore
+        willSendRequest({ request, context }) {
+        request.http.headers.set("x-user-id", context.userId);
+    }
+    }
+```
+
+As you can see, we are extending the RemoteGraphQLDataSource object, here we can add custom logic for our data sources.  Most commonly these classes edit the logic for `willSendRequest` and `didReceiveResponse`.
+
+### willSendRequest
+Override this method in a subclass to modify each outgoing fetch request before it's sent to the subgraph:
+This method takes a requestContext object that contains both the original unmodified request and the current context.
+
+### didReceiveReponse
+Override this method in a subclass to customize the gateway's behavior after it completes a fetch to the subgraph, but before it sends a response to the requesting client
+This method takes a requestContext object that contains:
+
+* The subgraph's response
+* The gateway's request to the subgraph
+* The current operation's context
+This enables you to modify any combination of the operation's context and the response of the fetch.
+
+The http property of the request and response objects contains additional HTTP-specific properties, such as headers.
+
+This method must return an object that matches the structure of a GraphQLResponse. If no modifications are necessary, return the original response.
+Source: https://www.apollographql.com/docs/federation/api/apollo-gateway/#class-remotegraphqldatasource
+
+### Service Library
+As you'll notice we are copying the same files to each subgraph.  A best practice would be to seperate these repeated sections of code into a service-library.  When doing so in a professional environment, you'll want to ensure your package.json references the correct version numbers, and that the package-lock.json (or yarn.lock) all require the same graphql versions.  Howver, to reduce complexity for this project, we will simply copy the repeating files to each new subgrpah.
+
+
+
+
 Helpful Documentation: [Apollo Studio - Getting Started](https://www.apollographql.com/docs/studio/getting-started/)

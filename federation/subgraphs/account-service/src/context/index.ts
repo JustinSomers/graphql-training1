@@ -1,9 +1,10 @@
-import { getSession, IImgurApi, errorConstants } from "service-library";
+import { IImgurApi } from "../dataSources";
+import { getSession, errorConstants } from "../util";
 
 import { ExpressContext } from "apollo-server-express";
 
 export type Session = {
-    [x:string]: any
+  [x: string]: any;
 };
 
 type DataSourceContext = {
@@ -16,6 +17,7 @@ export type CustomContext = {
   accessToken: string;
   session: Session;
   username: string;
+  clientId: string;
 };
 
 export type Context = CustomContext & DataSourceContext;
@@ -25,15 +27,18 @@ export const context = async (
 ): Promise<CustomContext> => {
   const { req } = expressContext;
   const accessToken: string | undefined = req.header("Authorization");
-  if (!accessToken) throw new Error(errorConstants.NO_AUTH_HEADER);
-  if (!process.env.USERNAME)
-    throw new Error(errorConstants.NO_USERNAME_ENV_VAR);
-    
-    let context = {
-        accessToken,
-        session: await getSession(expressContext),
-        username: process.env.USERNAME,
-    }
-    console.log(context);
+  const username: string | undefined = req.header("x-username");
+  const clientId: string | undefined = req.header('x-client-id')
+  // if (!accessToken) throw new Error(errorConstants.NO_AUTH_HEADER);
+  // if (!process.env.USERNAME)
+  //   throw new Error(errorConstants.NO_USERNAME_ENV_VAR);
+
+  let context = {
+    accessToken,
+    session: await getSession(expressContext),
+    username: username,
+    clientId
+  };
+  console.log(context);
   return context;
 };

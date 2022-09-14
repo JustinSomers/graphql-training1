@@ -50,7 +50,7 @@ start_services_training () {
       SERVICE=${SERVICE#\"}
       echo "Starting ${SERVICE}"
       osascript -e 'tell app "Terminal"
-        do script "cd '${PWD}/subgraphs/${SERVICE}' && yarn start"
+        do script "cd '${PWD}/subgraphs/${SERVICE}' && npm start"
       end tell'
     fi
     ITERATOR=$((ITERATOR+1))
@@ -61,6 +61,6 @@ start_services_training () {
 start_gateway_training () {
   echo "Starting the gateway"
   osascript -e 'tell app "Terminal"
-    do script "cd '${PWD}'/gateway && yarn start"
+    do script "cd '${PWD}'/gateway && npm start"
   end tell'
 }
