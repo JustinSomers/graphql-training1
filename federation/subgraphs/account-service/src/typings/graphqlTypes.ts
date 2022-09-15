@@ -1,4 +1,4 @@
-import { GraphQLResolveInfo } from 'graphql';
+import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -12,18 +12,18 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  link__Import: any;
 };
 
 export type Account = {
   __typename?: 'Account';
-  avatars?: Maybe<Avatars>;
   /** A basic description the user has filled out */
   bio?: Maybe<Scalars['String']>;
   cover?: Maybe<Cover>;
   /** The epoch time of account creation */
   created?: Maybe<Scalars['Int']>;
   /** The account id for the username requested */
-  id: Scalars['Int'];
+  id: Scalars['ID'];
   isBlocked?: Maybe<Scalars['Boolean']>;
   /** False if not a pro user, their expiration date if they are */
   proExpiration?: Maybe<Scalars['Boolean']>;
@@ -32,18 +32,6 @@ export type Account = {
   /** The account username, will be the same as requested in the URL */
   url?: Maybe<Scalars['String']>;
   userFollow?: Maybe<UserFollow>;
-};
-
-export type Avatar = {
-  __typename?: 'Avatar';
-  name?: Maybe<Scalars['String']>;
-  url?: Maybe<Scalars['String']>;
-};
-
-export type Avatars = {
-  __typename?: 'Avatars';
-  available?: Maybe<Array<Maybe<Avatar>>>;
-  current?: Maybe<Avatar>;
 };
 
 export type Cover = {
@@ -148,56 +136,54 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Account: ResolverTypeWrapper<Account>;
-  Avatar: ResolverTypeWrapper<Avatar>;
-  Avatars: ResolverTypeWrapper<Avatars>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Cover: ResolverTypeWrapper<Cover>;
+  ID: ResolverTypeWrapper<Scalars['ID']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Query: ResolverTypeWrapper<{}>;
   Reputation: ResolverTypeWrapper<Reputation>;
   String: ResolverTypeWrapper<Scalars['String']>;
   User: ResolverTypeWrapper<User>;
   UserFollow: ResolverTypeWrapper<UserFollow>;
+  link__Import: ResolverTypeWrapper<Scalars['link__Import']>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Account: Account;
-  Avatar: Avatar;
-  Avatars: Avatars;
   Boolean: Scalars['Boolean'];
   Cover: Cover;
+  ID: Scalars['ID'];
   Int: Scalars['Int'];
   Query: {};
   Reputation: Reputation;
   String: Scalars['String'];
   User: User;
   UserFollow: UserFollow;
+  link__Import: Scalars['link__Import'];
 };
 
+export type LinkDirectiveArgs = {
+  import?: Maybe<Array<Maybe<Scalars['link__Import']>>>;
+  url: Scalars['String'];
+};
+
+export type LinkDirectiveResolver<Result, Parent, ContextType = any, Args = LinkDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
+
+export type ShareableDirectiveArgs = { };
+
+export type ShareableDirectiveResolver<Result, Parent, ContextType = any, Args = ShareableDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
+
 export type AccountResolvers<ContextType = any, ParentType extends ResolversParentTypes['Account'] = ResolversParentTypes['Account']> = {
-  avatars?: Resolver<Maybe<ResolversTypes['Avatars']>, ParentType, ContextType>;
   bio?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   cover?: Resolver<Maybe<ResolversTypes['Cover']>, ParentType, ContextType>;
   created?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   isBlocked?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   proExpiration?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   reputation?: Resolver<Maybe<ResolversTypes['Reputation']>, ParentType, ContextType>;
   url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   userFollow?: Resolver<Maybe<ResolversTypes['UserFollow']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type AvatarResolvers<ContextType = any, ParentType extends ResolversParentTypes['Avatar'] = ResolversParentTypes['Avatar']> = {
-  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type AvatarsResolvers<ContextType = any, ParentType extends ResolversParentTypes['Avatars'] = ResolversParentTypes['Avatars']> = {
-  available?: Resolver<Maybe<Array<Maybe<ResolversTypes['Avatar']>>>, ParentType, ContextType>;
-  current?: Resolver<Maybe<ResolversTypes['Avatar']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -229,14 +215,21 @@ export type UserFollowResolvers<ContextType = any, ParentType extends ResolversP
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export interface Link__ImportScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['link__Import'], any> {
+  name: 'link__Import';
+}
+
 export type Resolvers<ContextType = any> = {
   Account?: AccountResolvers<ContextType>;
-  Avatar?: AvatarResolvers<ContextType>;
-  Avatars?: AvatarsResolvers<ContextType>;
   Cover?: CoverResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Reputation?: ReputationResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
   UserFollow?: UserFollowResolvers<ContextType>;
+  link__Import?: GraphQLScalarType;
 };
 
+export type DirectiveResolvers<ContextType = any> = {
+  link?: LinkDirectiveResolver<any, any, ContextType>;
+  shareable?: ShareableDirectiveResolver<any, any, ContextType>;
+};

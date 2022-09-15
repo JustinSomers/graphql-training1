@@ -5,7 +5,10 @@
   "main": "./src/server.ts",
   "scripts": {
     "start": "ts-node-dev ./src/server.ts",
-    "generate-typings": "graphql-codegen"
+    "generate-typings": "graphql-codegen",
+    "build": "npm run-script generate-typings && tsc && npm run-script build-schema",
+    "build-schema": "find ./src -type f -name \\*.graphql -not -path '*/__tests__/*' -exec cat {} + > build/schema.graphql",
+    "publish-schema": "APOLLO_KEY=service:FederatedImgur:nNuAPGpQ5xcmD0rM8BAESw rover subgraph publish FederatedImgur@current --name account-service --schema ./build/schema.graphql --routing-url http://localhost:4001/graph"
   },
   "dependencies": {
     "@apollo/gateway": "^2.1.1",

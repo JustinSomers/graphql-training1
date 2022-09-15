@@ -1,5 +1,5 @@
 {
-    "serviceName": "graphql-config-serivce",
+    "serviceName": "graphql-account-serivce",
     "graphQLPath": "/graph",
     "port": 4001,
     "introspection": true,

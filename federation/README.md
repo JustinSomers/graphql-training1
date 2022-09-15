@@ -73,9 +73,67 @@ This method must return an object that matches the structure of a GraphQLRespons
 Source: https://www.apollographql.com/docs/federation/api/apollo-gateway/#class-remotegraphqldatasource
 
 ### Service Library
-As you'll notice we are copying the same files to each subgraph.  A best practice would be to seperate these repeated sections of code into a service-library.  When doing so in a professional environment, you'll want to ensure your package.json references the correct version numbers, and that the package-lock.json (or yarn.lock) all require the same graphql versions.  Howver, to reduce complexity for this project, we will simply copy the repeating files to each new subgrpah.
+As you'll notice we are copying the same files to each subgraph.  A best practice would be to seperate these repeated sections of code into a service-library.  When doing so in a professional environment, you'll want to ensure your package.json references the correct version numbers, and that the package-lock.json (or yarn.lock) all require the same graphql versions.  Howver, to reduce complexity for this project, we will simply copy the repeating files to each new subgraph.
 
 
+### Setup the Avatar Service
+Now that you've finished the account-service, lets go ahead and create the Avatar service.  Go ahead and copy the template-service.  From there, you'll want to update the `config.json` file.  Then, go ahead and create a new resolver, `avatar.resolver.ts`.  Make sure to import this into `/resolvers/index.ts` and remove the `account.resolver.ts` refernce.  We will also copy the `avatar.service.ts` services from the monolith into the `/service` directory.
 
+In both of these two files (`avatar.resolver.ts`, `avatar.service.ts`) we will want to update the file path of typings.  Go ahead and update the import import: `import {
+    Account, QueryAccountArgs, Resolvers, User,
+  } from '../graphqlTypes';` to:
+
+  ```
+  import {
+    Account, QueryAccountArgs, Resolvers, User,
+  } from '../typings/graphqlTypes';
+  ```
+If you haven't already.  Note: The imported types will change as you update your resolver and services to use different types.
+
+
+ From there, we will copy the schema form the monolith for avatar.  Go ahead and copy `avatar.graphql` from the monolith over to `/schema/avatar.graphql` in the avatar-service.
+
+
+With the avatar.graphql service added, now lets enable federation 2 support.  To do this, create a new file in the `/schema/` directory, `fed2.graphql`.  From there, go ahead and paste the following into the the `fed2.graphql` file:
+
+```
+# Required for all subgraph schemas
+scalar link__Import
+
+directive @link(
+  url: String!,
+  import: [link__Import],
+) repeatable on SCHEMA
+
+# Required if the corresponding directive is used
+directive @shareable on FIELD_DEFINITION | OBJECT
+
+extend schema
+  @link(url: "https://specs.apollo.dev/federation/v2.0",
+        import: ["@key", "@shareable", "@external"])
+```
+This allow us to use the various keywords, such as @key, @shareable, and @external.  There are more of these available, such as `@tag` and a few others.  We will get into these later.
+
+Finally, assuming your application runs with `npm start`, we will want to add this to the gateway.  Go back to your `gateway.ts` file under the `federation` folder.  Go ahead and add this line:
+```
+      { name: "avatar-service", url: "http://localhost:4002/graph" },
+```
+to the `subgraphs` array resulting in this block of code:
+```
+ supergraphSdl: new IntrospectAndCompose({
+    subgraphs: [
+      { name: "account-service", url: "http://localhost:4001/graph" },
+      { name: "avatar-service", url: "http://localhost:4002/graph" },
+    ],
+    introspectionHeaders: {
+      Authorization: "Bearer abc123",
+    },
+  }),
+```
+Make sure that your port in the `url` matches up with the port specified in the `avatar-service`'s `config.json` for port.
+
+
+### Tags and Other Identifiers
+TODO ADDME
 
 Helpful Documentation: [Apollo Studio - Getting Started](https://www.apollographql.com/docs/studio/getting-started/)

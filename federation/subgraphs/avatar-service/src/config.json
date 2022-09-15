@@ -1,0 +1,8 @@
+{
+    "serviceName": "graphql-avatar-serivce",
+    "graphQLPath": "/graph",
+    "port": 4002,
+    "introspection": true,
+    "operationComplexityLimit": "20000"
+  }
+  

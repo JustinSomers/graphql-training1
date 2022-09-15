@@ -17,7 +17,7 @@ const config = {
   supergraphSdl: new IntrospectAndCompose({
     subgraphs: [
       { name: "account-service", url: "http://localhost:4001/graph" },
-    //   { name: "reviews", url: "https://reviews-service.dev/graphql" },
+      { name: "avatar-service", url: "http://localhost:4002/graph" },
     ],
     introspectionHeaders: {
       Authorization: "Bearer abc123",

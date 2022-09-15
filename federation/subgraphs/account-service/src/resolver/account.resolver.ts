@@ -5,6 +5,13 @@ import {
   import { Context } from '../context/';
   
   const AccountResolver: Resolvers = {
+    Account: {
+      // @ts-ignore
+    __resolveReference: (async (reference, context: Context): Promise<Account> => {
+      console.log(`reference: ${reference}`);
+      return account(context.username, context);
+    })
+  },
     User: {
       account: async (parent: User, _args, context: Context): Promise<Account> => {
         context.username = parent.username;

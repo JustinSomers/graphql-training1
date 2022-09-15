@@ -7,7 +7,6 @@ type AccountBaseData = {
   username: string
   url: string
   bio: string
-  avatar: string
   avatar_name: string
   cover: string
   cover_name: string

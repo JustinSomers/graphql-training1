@@ -14,11 +14,11 @@ type Query {
   account(username: String!): Account
 }
 
-type Account {
+type Account @key(fields: "id") {
   """
   The account id for the username requested
   """
-  id: Int!
+  id: ID!
   """
   A basic description the user has filled out
   """
@@ -42,17 +42,6 @@ type Account {
   proExpiration: Boolean
   userFollow: UserFollow
   isBlocked: Boolean
-  avatars: Avatars
-}
-
-type Avatars {
-  current: Avatar
-  available: [Avatar]
-}
-
-type Avatar {
-  url: String
-  name: String
 }
 
 type Cover {

@@ -1,0 +1,16 @@
+type Avatars {
+  available: [Avatar]
+}
+
+type Avatar {
+  url: String
+  name: String
+}
+
+type Account @key(fields: "id") {
+  id: ID!
+  """
+  Current and Available avatars associated with this user's account
+  """
+  avatars: Avatars
+}

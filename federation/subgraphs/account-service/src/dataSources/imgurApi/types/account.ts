@@ -3,7 +3,6 @@ export type AccountData = {
   username: string,
   url: string,
   is_blocked: boolean,
-  avatar: string,
   avatar_name: string,
   bio: string,
   cover: string,

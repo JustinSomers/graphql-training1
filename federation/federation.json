@@ -12,6 +12,11 @@
         "mode": "local",
         "name": "account-service",
         "local": "http://localhost:4001/graph"
+      },
+      {
+        "mode": "local",
+        "name": "avatar-service",
+        "local": "http://localhost:4002/graph"
       }
     ]
   }
