@@ -2,7 +2,7 @@ import {
     Account, QueryAccountArgs, Resolvers, User,
   } from '../typings/graphqlTypes';
   import account from '../service/account.service';
-  import { Context } from '../context/';
+  import { Context } from '../context';
   
   const AccountResolver: Resolvers = {
     User: {

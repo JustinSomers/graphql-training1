@@ -13,7 +13,7 @@ const config = {
   //additions 2
   supergraphSdl: new IntrospectAndCompose({
     subgraphs: [
-      // { name: "update-me-service", url: "http://localhost:4001/graph" },
+      { name: "account-service", url: "http://localhost:4001/graph" },
     ],
     introspectionHeaders: {
       Authorization: "Bearer abc123",

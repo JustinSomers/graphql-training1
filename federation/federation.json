@@ -8,21 +8,11 @@
       "//f": "Modify the modes to fit how you'd like to start federation locally or in proxy."
     },
     "serviceList": [
-      // {
-      //   "mode": "local",
-      //   "name": "account-service",
-      //   "local": "http://localhost:4001/graph"
-      // },
-      // {
-      //   "mode": "local",
-      //   "name": "avatar-service",
-      //   "local": "http://localhost:4002/graph"
-      // },
-      // {
-      //   "mode": "local",
-      //   "name": "viewer-service",
-      //   "local": "http://localhost:4003/graph"
-      // }
+      {
+        "mode": "local",
+        "name": "account-service",
+        "local": "http://localhost:4001/graph"
+      }
     ]
   }
   

@@ -4,7 +4,10 @@
   "description": "",
   "main": "gateway.ts",
   "scripts": {
-    "start": "ts-node-dev gateway.ts"
+    "start": "ts-node-dev gateway.ts",
+    "generate-typings": "graphql-codegen",
+    "build": "npm run-script generate-typings && tsc && npm run-script build-schema",
+    "build-schema": "find ./src -type f -name \\*.graphql -not -path '*/__tests__/*' -exec cat {} + > build/schema.graphql"
   },
   "dependencies": {
     "@apollo/gateway": "^2.1.1",

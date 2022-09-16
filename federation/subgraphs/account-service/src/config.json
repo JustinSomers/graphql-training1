@@ -1,7 +1,7 @@
 {
-    "serviceName": "graphql-TEMPPLATE-serivce",
+    "serviceName": "graphql-account-serivce",
     "graphQLPath": "/graph",
-    "port": 4400,
+    "port": 4001,
     "introspection": true,
     "operationComplexityLimit": "20000"
   }
