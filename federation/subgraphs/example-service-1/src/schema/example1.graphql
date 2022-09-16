@@ -1,0 +1,109 @@
+type Query {
+  exampleService: ExampleService
+}
+
+type ExampleService {
+  myFirstShareableType: MyFirstShareableType
+  myFirstExternalType: MyFirstExternalType
+  myFirstContract: MyFirstContract @tag(name: "exampleContract")
+  exampleValue: String!
+}
+
+"""
+Information about the authenticated user (viewer)
+"""
+type MyFirstShareableType {
+  "Shareable makes a field resolvable by both fields."
+  favoriteRestaruant: String! @shareable
+  favoriteSandwhich: Sandwhich @shareable 
+}
+
+type Sandwhich {
+  protein: String!
+  topping: String!
+  sauce: String!
+}
+
+type MyFirstExternalType {
+  "Tagging external will let the type show up in the schema - but the actual field is resolved in another subgraph"
+  externalServiceName: String! @external
+  exampleService: ExampleService
+}
+
+"""
+When making a contract with an enum, you need to ensure to tag enums also
+"""
+enum Example @tag(name: "exampleContract") {
+  EXAMPLE_1
+  EXAMPLE_2
+}
+
+"""
+
+"""
+type MyFirstContract {
+    tagOne: String! @tag(name: "exampleContract")
+    tagTwo: NestedContract @tag(name: "exampleContract")
+    tagThree: NestedContractTwo @tag(name: "exampleContract")
+}
+type NestedContract {
+  contractName: String! @tag(name: "exampleContract")
+  serviceName: Example @tag(name: "exampleContract")
+}
+
+"""
+Tagging at the top will tag all the child properties, but won't tag grand-children properties
+"""
+type NestedContractTwo @tag(name: "exampleContract") {
+  contractName: String!
+  serviceName: Example
+}
+
+"""
+@requires indicates that it requires the @external fields that are resolved by other subgraphs
+In order to resolve the the field the @requires directive is used with.
+
+In this example, we see shippingEstimate requires the size and weight fields from outside this graph
+to be used
+"""
+type Product @key(fields: "id") {
+  id: ID!
+  size: Int @external
+  weight: Int @external
+  shippingEstimate: String @requires(fields: "size weight")
+}
+
+"""
+In this example, @shareable is saying that the field name can be resolved by this graph
+and an external subgraph.  Note: @key fields (in this case - id) are always considered shareable.
+
+Implementation wise, say we had two subgraphs, house-paint-service and craft-paint.  They might
+both share some fields, but would call different datasoruces.
+"""
+type Paint @key(fields: "id") {
+  id: ID!
+  name: String! @shareable
+}
+
+"""
+In this example, Paint is called in multilpe subgraphs.
+Here the name field is resolved in another subgraph, and inStock is resolved
+In this subgraph.
+"""
+type Paint @key(fields: "id") {
+  id: ID!
+  name: String! @external
+  inStock: Boolean!
+}
+
+"""
+However, depending on how each resolver is implemented for each type,
+this could potentially change from the above.  In this case, 
+outOfStockPaint can actually resolve the "name" field while discontinuePaint cannot.
+This is an optimaztion, where outOfStockPaint doesn't need to make another request to retrieve
+name from the subgraph.
+"""
+type Query {
+  outOfStockPaint: [Paint!]! @provides(fields: "name")
+  discontinuedPaint: [Paint!]!
+}
