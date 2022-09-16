@@ -1,0 +1,66 @@
+check_for_jq_training () {
+  if brew ls --versions jq > /dev/null; then
+    echo jq is installed, continuing
+    echo foobar
+  else
+    echo You must run brew install jq to make this script work
+    echo jq is not installed, exiting
+    exit 1
+  fi
+}
+
+load_federation_json_training () {
+    FEDERATION_JSON_FILE_CONTENTS="`cat ${PWD}/federation.json`"
+    echo $FEDERATION_JSON_FILE_CONTENTS
+    if [ "${FEDERATION_JSON_FILE_CONTENTS}" == "" ]; then
+      echo "federation.json not found, exiting"
+      exit 1
+    fi
+}
+
+populate_service_list_training () {
+  SERVICE_LIST=$(jq '.serviceList' <<< "${FEDERATION_JSON_FILE_CONTENTS}")
+  if [ "${SERVICE_LIST}" == "[]" ]; then
+    echo "No services found in federation.json, exiting"
+    exit 1
+  fi
+}
+
+start_services_training () {
+  SHOULD_START_PROXY=false
+  ITERATOR=0
+  while true
+  do
+    SERVICE=$(jq ".[${ITERATOR}].name" <<< "${SERVICE_LIST}")
+    if [ "${SERVICE}" = "null" ]; then
+      break
+    fi
+    SERVICE_MODE=$(jq ".[${ITERATOR}].mode" <<< "${SERVICE_LIST}")
+    # REMOVE SUFFIX QUOTE
+    SERVICE_MODE=${SERVICE_MODE%\"}
+    # REMOVE PREFIX QUOTE
+    SERVICE_MODE=${SERVICE_MODE#\"}
+    if [ "${SERVICE_MODE}" = "proxy" ]; then
+      SHOULD_START_PROXY=true
+    fi
+    if [ "${SERVICE_MODE}" == "local" ]; then
+      # REMOVE SUFFIX QUOTE
+      SERVICE=${SERVICE%\"}
+      # REMOVE PREFIX QUOTE
+      SERVICE=${SERVICE#\"}
+      echo "Starting ${SERVICE}"
+      osascript -e 'tell app "Terminal"
+        do script "cd '${PWD}/subgraphs/${SERVICE}' && npm start"
+      end tell'
+    fi
+    ITERATOR=$((ITERATOR+1))
+  done
+}
+
+
+start_gateway_training () {
+  echo "Starting the gateway"
+  osascript -e 'tell app "Terminal"
+    do script "cd '${PWD}'/gateway && npm start"
+  end tell'
+}

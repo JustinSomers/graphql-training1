@@ -1,0 +1,8 @@
+source startfederation_functions
+
+check_for_jq_training
+load_federation_json_training
+populate_service_list_training
+start_services_training
+sleep 15
+start_gateway_training

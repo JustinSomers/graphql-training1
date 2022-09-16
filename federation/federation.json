@@ -1,0 +1,28 @@
+{
+    "comments": {
+      "//a": "On MacOS mkdir ~/.graphql directory, copy/paste this file into the ~/.graphql directory.",
+      "//b": "Windows $USERPROFILE functionality has not been tested.",
+      "//c": "This file is meant to be used with the startfed script but can also be used on its own to manually start federation.",
+      "//d": "The three options available for mode are local, disabled, and proxy.",
+      "//e": "Only the monolith, account, and identity are enabled to start locally by default in this file.",
+      "//f": "Modify the modes to fit how you'd like to start federation locally or in proxy."
+    },
+    "serviceList": [
+      // {
+      //   "mode": "local",
+      //   "name": "account-service",
+      //   "local": "http://localhost:4001/graph"
+      // },
+      // {
+      //   "mode": "local",
+      //   "name": "avatar-service",
+      //   "local": "http://localhost:4002/graph"
+      // },
+      // {
+      //   "mode": "local",
+      //   "name": "viewer-service",
+      //   "local": "http://localhost:4003/graph"
+      // }
+    ]
+  }
+  
