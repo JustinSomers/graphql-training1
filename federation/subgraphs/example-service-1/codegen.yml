@@ -1,0 +1,10 @@
+schema: 'src/schema/*.graphql'
+generates:
+  ./src/typings/graphqlTypes.ts:
+    plugins:
+      - 'typescript'
+      - 'typescript-resolvers'
+    config:
+      enumsAsTypes: true
+      noSchemaStitching: true
+      makeResolverTypeCallable: true

@@ -132,7 +132,38 @@ to the `subgraphs` array resulting in this block of code:
 ```
 Make sure that your port in the `url` matches up with the port specified in the `avatar-service`'s `config.json` for port.
 
+### Starting a New Subgraph
+Go ahead and copy the Avatar Service again, and update the `config.json`, update the `.graphql` files and more.  Once your service is up and running, update the `federation.json` file to add your service.  Then, add your service to the gateway's `gateway.ts` file, at the `subgraphs:` array.  Make sure the url includes the updated port that matches your `config.json` file.
+```
+      { name: "viewer-service", url: "http://localhost:4003/graph" },
+```
 
+### Example Service
+In the Example Service we will give examples of various federation-specific directives you can use.  Some of these examples include @tag, @shareable, and @external.  To use these tags, in the `fed2.graphql` file, you will need to add the directive to the import statement:
+```
+import: ["@key", "@shareable", "@external", "@tag"])
+```
+
+@tag allows us to create Contracts - which we can chose to create federated graphs that include these tags, or exclude these tags.  This can be useful to create subgraphs that you limit the scope of.  A great example of this is creating a contract with a vendor's name to limit access to the graph for only what the vendor needs. 
+
+@shareable is used when a field can be resolved across multiple subgraphs.  For example, if the type with the @shareable field - we can have this field show up in multilpe subgraphs.  The subgraph will need to resolve that field however.
+
+@external - Indicates that this subgraph usually can't resolve a particular object field, but it still needs to define that field for other purposes.
+
+This directive is always used in combination with another directive that references object fields, such as @provides or @requires.
+
+@provides - Specifies a set of entity fields that a subgraph can resolve, but only at a particular schema path (at other paths, the subgraph can't resolve those fields).
+
+If a subgraph can always resolve a particular entity field, do not apply this directive.
+
+Using this directive is always an optional optimization. It can reduce the total number of subgraphs that your graph router needs to communicate with to resolve certain operations, which can improve performance.
+
+@requires
+Indicates that the resolver for a particular entity field depends on the values of other entity fields that are resolved by other subgraphs. This tells the graph router that it needs to fetch the values of those externally defined fields first, even if the original client query didn't request them.
+```
+
+More information about these can be found here:
+https://www.apollographql.com/docs/federation/federated-types/federated-directives/
 ### Tags and Other Identifiers
 TODO ADDME
 

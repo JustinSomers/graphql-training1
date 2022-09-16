@@ -17,6 +17,11 @@
         "mode": "local",
         "name": "avatar-service",
         "local": "http://localhost:4002/graph"
+      },
+      {
+        "mode": "local",
+        "name": "viewer-service",
+        "local": "http://localhost:4003/graph"
       }
     ]
   }

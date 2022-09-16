@@ -18,6 +18,8 @@ const config = {
     subgraphs: [
       { name: "account-service", url: "http://localhost:4001/graph" },
       { name: "avatar-service", url: "http://localhost:4002/graph" },
+      { name: "viewer-service", url: "http://localhost:4003/graph" },
+
     ],
     introspectionHeaders: {
       Authorization: "Bearer abc123",
